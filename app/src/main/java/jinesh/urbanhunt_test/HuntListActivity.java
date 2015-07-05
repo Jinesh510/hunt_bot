@@ -20,5 +20,7 @@ public class HuntListActivity extends Activity {
         hunt = new Hunt();
 
         super.onCreate(savedInstanceState);
+
+
     }
 }
