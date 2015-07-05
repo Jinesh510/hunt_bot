@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.ParseImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -33,14 +34,22 @@ public class HuntListAdapter extends ArrayAdapter<Hunt> {
         //Lookup views in item layout
 
         TextView huntTitle = (TextView)convertView.findViewById(R.id.huntTitle);
-        //ImageView huntImage = (ImageView)convertView.findViewById(R.id.huntImage);
+        ImageView huntImage = (ImageView)convertView.findViewById(R.id.huntImage);
 
-        ParseImageView huntImage = (ParseImageView)convertView.findViewById(R.id.huntImage);
+//        ParseImageView huntImage = (ParseImageView)convertView.findViewById(R.id.huntImage);
 
         //loading data into template
 
         huntTitle.setText(hunt.getTitle());
-        huntImage.setParseFile(hunt.getPhotoFile());
+//        huntImage.setParseFile(hunt.getPhotoFile());
+//        huntImage.loadInBackground(new GetDataCallback() {
+//            @Override
+//            public void done(byte[] bytes, ParseException e) {
+//
+//            }
+//        });
+
+        Picasso.with(getContext()).load(hunt.getPhotoFile().getUrl()).into(huntImage);
 
 
         return convertView;

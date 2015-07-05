@@ -3,20 +3,20 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="16dp">
 
-    <com.parse.ParseImageView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/huntImage"
-        android:maxHeight="280dp"
+        android:maxHeight="70dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        android:src="@drawable/image_dummy"/>
+        />
     <TextView
         android:id="@+id/huntTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/huntImage"
         android:hint="First Hunt"
+        android:layout_below="@+id/huntImage"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="20sp"
