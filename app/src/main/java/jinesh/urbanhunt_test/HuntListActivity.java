@@ -2,7 +2,7 @@ package jinesh.urbanhunt_test;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -17,7 +17,8 @@ import java.util.List;
 public class HuntListActivity extends Activity {
 
     private HuntListAdapter adapterHunts;
-    private ListView lvHunts;
+//    private ListView lvHunts;
+    private GridView lvHunts;
 
     public HuntListActivity() {
         super();
@@ -28,7 +29,7 @@ public class HuntListActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hunt_list);
-        lvHunts = (ListView)findViewById(R.id.lvHunts);
+        lvHunts = (GridView)findViewById(R.id.lvHunts);
         ArrayList<Hunt> aHunts = new ArrayList<Hunt>();
         adapterHunts = new HuntListAdapter(this,aHunts);
         lvHunts.setAdapter(adapterHunts);

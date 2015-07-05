@@ -10,7 +10,7 @@
         android:maxHeight="70dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        />
+        android:layout_centerInParent="true"/>
     <TextView
         android:id="@+id/huntTitle"
         android:layout_width="match_parent"
