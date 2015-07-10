@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/huntImage"
-        android:maxHeight="40dp"
+        android:maxHeight="70dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"/>
