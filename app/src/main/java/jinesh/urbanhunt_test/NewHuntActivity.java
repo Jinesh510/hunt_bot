@@ -3,9 +3,7 @@ package jinesh.urbanhunt_test;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -143,8 +141,10 @@ public class NewHuntActivity extends ActionBarActivity {
                     startActivityForResult(intent, 1);
                 }
                 else if(items[i].equals("Choose from Gallery")){
-                    Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent. setType("image/*");
+//                    Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
                     startActivityForResult(Intent.createChooser(intent,"Select File"),2);
 
                 } else if (items[i].equals("Cancel")){
@@ -197,34 +197,48 @@ public class NewHuntActivity extends ActionBarActivity {
                 }
             else if (requestCode == 2){
                 Uri selectedImageUri = data.getData();
-                String[] projection = {MediaStore.MediaColumns.DATA};
-                Cursor cursor = getContentResolver().query(selectedImageUri, projection, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-                cursor.moveToFirst();
-
-
-                String selectedImagePath = cursor.getString(column_index);
-
-                cursor.close();
-
-                Bitmap bp;
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                bp = BitmapFactory.decodeFile(selectedImagePath, options);
-
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bp.compress(Bitmap.CompressFormat.JPEG,90,bytes);
-                imgByte = bytes.toByteArray();
-
-
-
-//                File destination = new File(selectedImagePath);
+//                String[] projection = {MediaStore.MediaColumns.DATA};
+//                Cursor cursor = getContentResolver().query(selectedImageUri, projection, null, null, null);
+//                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+//                cursor.moveToFirst();
 //
-//                ImagePath = destination;
+//
+//                String selectedImagePath = cursor.getString(column_index);
+//
+//                cursor.close();
 
-                iv.setImageBitmap(bp);
+                //trial
+                try {
+                    Bitmap bp1= MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+
+                    ByteArrayOutputStream bytes1 = new ByteArrayOutputStream();
+                    bp1.compress(Bitmap.CompressFormat.JPEG,90,bytes1);
+                    imgByte = bytes1.toByteArray();
+
+                    iv.setImageBitmap(bp1);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
 
+                //ends
+//                Bitmap bp;
+//                BitmapFactory.Options options = new BitmapFactory.Options();
+//                bp = BitmapFactory.decodeFile(selectedImagePath, options);
+//
+//                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//                bp.compress(Bitmap.CompressFormat.JPEG,90,bytes);
+//                imgByte = bytes.toByteArray();
+//
+//
+//
+////                File destination = new File(selectedImagePath);
+////
+////                ImagePath = destination;
+//
+//                iv.setImageBitmap(bp);
 
 
 

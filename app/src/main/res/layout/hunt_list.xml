@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lvHunts"
-        android:layout_margin="4dp"
+        android:layout_margin="10dp"
         android:columnWidth="140dp"
         android:gravity="center"
         android:numColumns="auto_fit"
