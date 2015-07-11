@@ -3,7 +3,6 @@ package jinesh.urbanhunt_test;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -19,7 +18,6 @@ public class HuntListActivity extends Activity {
 
     private HuntListAdapter adapterHunts;
 //    private ListView lvHunts;
-    private TextView lvTitle;
 
     public HuntListActivity() {
         super();

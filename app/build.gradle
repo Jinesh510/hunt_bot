@@ -11,13 +11,21 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
+            android.enforceUniquePackageName=false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
+
+//repositories {
+//    mavenCentral()
+//    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+//    jcenter()
+//}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -25,4 +33,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: 'bolts-android-1.2.0.jar')
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile files('libs/picasso-2.5.2.jar')
+    compile 'com.android.support:recyclerview-v7:22.1.1'
 }
