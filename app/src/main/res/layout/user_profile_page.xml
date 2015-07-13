@@ -37,7 +37,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/follow"
         android:layout_below="@+id/hlvHunts"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
         android:text="Follow"
         android:layout_alignParentLeft="true"/>
 
@@ -46,15 +47,27 @@
         android:layout_height="wrap_content"
         android:id="@+id/unfollow"
         android:layout_below="@+id/hlvHunts"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
         android:text="Unfollow"
         android:layout_alignParentRight="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/followingCount"
+        android:id="@+id/Following"
         android:layout_below="@+id/follow"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="20sp"
+        android:text="Following"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/followingCount"
+        android:layout_below="@+id/Following"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
@@ -63,8 +76,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/Followers"
+        android:layout_below="@+id/unfollow"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:textSize="20sp"
+        android:text="Followers"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/followerCount"
-        android:layout_below="@+id/follow"
+        android:layout_below="@+id/Followers"
         android:layout_alignParentRight="true"
         android:layout_marginTop="20dp"
         android:layout_marginRight="50dp"
