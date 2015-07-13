@@ -26,10 +26,49 @@
     <jinesh.urbanhunt_test.HorizontalListView
         android:id="@+id/hlvHunts"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:maxHeight = "100dp"
+        android:layout_height="200dp"
+        android:maxHeight = "200dp"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/usrName">
     </jinesh.urbanhunt_test.HorizontalListView>
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/follow"
+        android:layout_below="@+id/hlvHunts"
+        android:layout_marginTop="50dp"
+        android:text="Follow"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/unfollow"
+        android:layout_below="@+id/hlvHunts"
+        android:layout_marginTop="50dp"
+        android:text="Unfollow"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/followingCount"
+        android:layout_below="@+id/follow"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/followerCount"
+        android:layout_below="@+id/follow"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:textSize="20sp"/>
+
 
 </RelativeLayout>

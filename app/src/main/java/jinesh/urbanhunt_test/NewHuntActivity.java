@@ -167,7 +167,7 @@ public class NewHuntActivity extends ActionBarActivity {
                 Bitmap bp = (Bitmap) data.getExtras().get("data");
 
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bp.compress(Bitmap.CompressFormat.JPEG,90,bytes);
+                bp.compress(Bitmap.CompressFormat.JPEG,40,bytes);
 
                 File destination = new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis() + ".jpg");
 
@@ -212,7 +212,7 @@ public class NewHuntActivity extends ActionBarActivity {
                     Bitmap bp1= MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
 
                     ByteArrayOutputStream bytes1 = new ByteArrayOutputStream();
-                    bp1.compress(Bitmap.CompressFormat.JPEG,90,bytes1);
+                    bp1.compress(Bitmap.CompressFormat.JPEG,40,bytes1);
                     imgByte = bytes1.toByteArray();
 
                     iv.setImageBitmap(bp1);

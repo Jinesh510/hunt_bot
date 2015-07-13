@@ -23,6 +23,7 @@
             android:name=".HuntListActivity"
             android:label="HuntListActivity" >
 
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
