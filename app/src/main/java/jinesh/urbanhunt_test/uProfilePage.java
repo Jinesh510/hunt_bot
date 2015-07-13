@@ -98,6 +98,8 @@ public class uProfilePage extends Activity {
 
     Button follow;
     Button unfollow;
+    TextView followerCount;
+    TextView followingCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,15 +153,19 @@ public class uProfilePage extends Activity {
 
 
                 ParseQuery<ParseUser> userFollowQuery = ParseUser.getQuery();
-                try {
-                    ParseUser parseUser1 = userFollowQuery.get(userObjectID);
-                    ParseObject followObject = new ParseObject("Follow");
-                    followObject.put("follower", currentUser);
-                    followObject.put("following", parseUser1);
-                    followObject.saveEventually();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                userFollowQuery.getInBackground(userObjectID, new GetCallback<ParseUser>() {
+                    @Override
+                    public void done(ParseUser parseUser, ParseException e) {
+                        ParseObject followObject = new ParseObject("Follow");
+                        followObject.put("follower", currentUser);
+                        followObject.put("following", parseUser);
+                        followObject.saveEventually();
+                        followerUI();
+                        updatefollowerCount();
+                    }
+                });
+
+
 
             }
         });
@@ -171,35 +177,81 @@ public class uProfilePage extends Activity {
                 Log.d("clicked","button clicked");
 
                 ParseQuery<ParseUser> userFollowQuery = ParseUser.getQuery();
-                try {
-                    final ParseUser parseUser1 = userFollowQuery.get(userObjectID);
-//                    Log.d("User","User obtained");
-                    ParseQuery<ParseObject> uRQuery = ParseQuery.getQuery("Follow");
-                    uRQuery.whereEqualTo("follower", currentUser);
-                    uRQuery.whereEqualTo("following", parseUser1);
-                    uRQuery.getFirstInBackground(new GetCallback<ParseObject>() {
-                        @Override
-                        public void done(ParseObject parseObject, ParseException e) {
-//                            Log.d("OBJ","Object Found - delete it" + parseObject.getObjectId() );
-                            parseObject.deleteInBackground(new DeleteCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    Log.d("DEL","Object Deleted");
-                                    fetchUserRelationship(parseUser1);
-                                    Log.d("update","updated UI");
-                                }
-                            });
+                userFollowQuery.getInBackground(userObjectID, new GetCallback<ParseUser>() {
+                    @Override
+                    public void done(ParseUser parseUser, ParseException e) {
+
+                        runUnfollow(parseUser);
+
                         }
                     });
 
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
             }
             });
 
 
 
+
+    }
+
+    private void runUnfollow(ParseUser parseUser){
+        ParseQuery<ParseObject> uRQuery = ParseQuery.getQuery("Follow");
+        uRQuery.whereEqualTo("follower", currentUser);
+        uRQuery.whereEqualTo("following", parseUser);
+        uRQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+//                            Log.d("OBJ","Object Found - delete it" + parseObject.getObjectId() );
+                parseObject.deleteInBackground(new DeleteCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        Log.d("DEL","Object Deleted");
+                        unfollowUI();
+                        Log.d("update", "updated UI");
+                        updateUnfollowCount();
+
+                    }
+                });
+//                    Log.d("User","User obtained");
+
+            }
+        });
+
+
+    }
+
+    private void updatefollowerCount(){
+        followerCount = (TextView)findViewById(R.id.followerCount);
+        int followerCountInt = Integer.parseInt(followerCount.getText().toString());
+        followerCountInt = followerCountInt + 1;
+        followerCount.setText("" + followerCountInt);
+
+    }
+
+    private void updateUnfollowCount(){
+        followerCount = (TextView)findViewById(R.id.followerCount);
+        int followerCountInt = Integer.parseInt(followerCount.getText().toString());
+        followerCountInt = followerCountInt - 1;
+        followerCount.setText("" + followerCountInt);
+
+    }
+    private void followerUI(){
+
+        follow.setVisibility(View.VISIBLE);
+        follow.setClickable(false);
+        follow.setText("Following");
+        follow.setTextColor(Color.parseColor("#7f8c8d"));
+        unfollow.setVisibility(View.VISIBLE);
+
+    }
+
+    private void unfollowUI(){
+
+        follow.setVisibility(View.VISIBLE);
+        follow.setClickable(true);
+        follow.setText("Follow");
+        follow.setTextColor(follow.getTextColors().getDefaultColor());
+        unfollow.setVisibility(View.INVISIBLE);
 
     }
 
@@ -243,7 +295,7 @@ public class uProfilePage extends Activity {
             public void done(int followerCountInt, ParseException e) {
 
                 String followerCountStr = Integer.toString(followerCountInt);
-                TextView followerCount = (TextView)findViewById(R.id.followerCount);
+                followerCount = (TextView)findViewById(R.id.followerCount);
                 followerCount.setText(followerCountStr);
             }
         });
@@ -265,7 +317,7 @@ public class uProfilePage extends Activity {
             @Override
             public void done(int followingCountInt, ParseException e) {
                 String followingCountStr = Integer.toString(followingCountInt);
-                TextView followingCount = (TextView)findViewById(R.id.followingCount);
+                followingCount = (TextView)findViewById(R.id.followingCount);
                 followingCount.setText(followingCountStr);
             }
         });
