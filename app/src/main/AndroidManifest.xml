@@ -20,8 +20,9 @@
         android:debuggable="true"
         tools:ignore="HardcodedDebugMode">
         <activity
-            android:name=".HuntListActivity"
-            android:label="HuntListActivity" >
+
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
 
 
             <intent-filter>
@@ -31,8 +32,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name=".HuntListActivity"
+            android:label="HuntListActivity" >
         </activity>
         <activity
             android:name=".NewHuntActivity"
