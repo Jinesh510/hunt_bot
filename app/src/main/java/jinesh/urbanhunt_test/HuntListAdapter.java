@@ -1,6 +1,5 @@
 package jinesh.urbanhunt_test;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -20,10 +19,11 @@ import java.util.ArrayList;
  */
 public class HuntListAdapter extends ArrayAdapter<Hunt> {
 
-    Activity activity;
+    MainActivity activity;
     public HuntListAdapter(Context context,ArrayList<Hunt> aHunts) {
         super(context,0,aHunts);
-        activity = (HuntListActivity)context;
+        activity = (MainActivity)context;
+
 
     }
 
