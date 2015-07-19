@@ -113,4 +113,6 @@ public class HuntListActivity extends Fragment {
 
 
 
+
+
 }
