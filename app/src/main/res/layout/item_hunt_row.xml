@@ -1,43 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="#E6E6E6"
-    card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="8dp">
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="8dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/huntImage"
-            android:maxHeight="75dp"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:layout_centerHorizontal="true"/>
-        <TextView
-            android:id="@+id/huntTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="First Hunt"
-            android:layout_below="@+id/huntImage"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:paddingTop="10dp"
-            android:layout_margin="10dp"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/shareHunt"
-            android:src = "@drawable/ic_share"
-            android:layout_alignRight="@+id/huntTitle"/>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/huntCard"
+        android:layout_gravity="center"
+        card_view:contentPadding="8dp"
+        card_view:cardBackgroundColor="#E6E6E6"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="5dp">
 
-    </RelativeLayout>
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:padding="8dp">
 
-</android.support.v7.widget.CardView>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/huntImage"
+                android:maxHeight="30dp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/huntTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="First Hunt"
+                android:layout_below="@+id/huntImage"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:paddingTop="5dp"
+                android:layout_margin="5dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shareHunt"
+                android:src = "@drawable/ic_share"
+                android:layout_alignRight="@+id/huntTitle"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

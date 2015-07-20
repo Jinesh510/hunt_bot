@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +34,11 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
         public TextView huntTitle;
         public ImageView huntImage;
         public ImageView shareHunt;
+        public CardView huntCard;
 
         public ViewHolder(View itemView){
             super(itemView);
+            this.huntCard = (CardView)itemView.findViewById(R.id.huntCard);
             this.huntTitle = (TextView)itemView.findViewById(R.id.huntTitle);
             this.huntImage = (ImageView)itemView.findViewById(R.id.huntImage);
             this.shareHunt = (ImageView)itemView.findViewById(R.id.shareHunt);
