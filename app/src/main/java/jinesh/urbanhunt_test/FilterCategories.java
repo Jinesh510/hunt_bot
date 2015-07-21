@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 /**
  * Created by Jinesh on 21/07/15.
@@ -28,6 +29,15 @@ public class FilterCategories extends AppCompatActivity {
 
         String strCategoryName = getIntent().getStringExtra("category");
         toolbar.setTitle(strCategoryName);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         Log.d("category",strCategoryName);
 //        huntListFragment  = new HuntListActivity();
 
