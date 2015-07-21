@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
+
+        Fragment homeFragment = HomeFragment.newInstance();
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, homeFragment).commit();
+
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
-                fragmentClass = HuntListActivity.class;
+                fragmentClass = FirstFragment.class;
                 break;
             case R.id.nav_second_fragment:
                 fragmentClass = SecondFragment.class;
@@ -117,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = ThirdFragment.class;
                 break;
             default:
-                fragmentClass = HuntListActivity.class;
+                fragmentClass = FirstFragment.class;
         }
 
         try {

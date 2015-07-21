@@ -46,6 +46,9 @@
         <activity android:name=".uProfilePage"
             android:label="ProfilePage">
         </activity>
+        <activity android:name=".FilterCategories"
+            android:label="FilterCategories">
+        </activity>
     </application>
 
 </manifest>
