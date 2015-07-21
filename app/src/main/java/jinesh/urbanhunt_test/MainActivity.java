@@ -112,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
         Class fragmentClass;
         switch(menuItem.getItemId()) {
+            case R.id.nav_home:
+                fragmentClass = HomeFragment.class;
+                break;
             case R.id.nav_first_fragment:
                 fragmentClass = FirstFragment.class;
                 break;
