@@ -3,10 +3,10 @@
     android:id="@+id/main_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp">
-
 
 
     <android.support.v7.widget.RecyclerView
@@ -14,16 +14,85 @@
         android:layout_height="match_parent"
         android:id="@+id/rvHunts"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:id="@+id/post"
-        android:src="@drawable/ic_post"
-        app:layout_anchor="@id/rvHunts"
-        app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="jinesh.urbanhunt_test.ScrollAwareFABBehavior" />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:id="@+id/post"-->
+        <!--android:src="@drawable/ic_post"-->
+        <!--app:layout_anchor="@id/rvHunts"-->
+        <!--app:layout_anchorGravity="bottom|right|end"-->
+        <!--app:layout_behavior="jinesh.urbanhunt_test.ScrollAwareFABBehavior" />-->
+
+    <!--<com.github.clans.fab.FloatingActionButton-->
+        <!--android:id="@+id/post"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:src="@drawable/ic_post"-->
+        <!--fab:fab_colorNormal="#DA4336"-->
+        <!--fab:fab_colorPressed="#E75043"-->
+        <!--fab:fab_colorRipple="#99FFFFFF"/>-->
+        <FrameLayout
+            android:id="@+id/shadowView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relLay">
+
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/menu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:menu_labels_style="@style/MenuLabelsStyle"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                fab:menu_labels_showAnimation="@anim/jump_from_down"
+                fab:menu_labels_hideAnimation="@anim/jump_to_down"
+                fab:menu_animationDelayPerItem="0"
+                fab:menu_shadowColor="#444"
+                fab:menu_colorNormal="#FFB805"
+                fab:menu_colorPressed="#F2AB00"
+                fab:menu_colorRipple="#D99200">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fab12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dress"
+                    fab:fab_label="Menu item 1"
+                    style="@style/MenuButtonsStyle" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fab22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bag"
+                    fab:fab_label="Menu item 2"
+                    style="@style/MenuButtonsStyle" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fab32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sunglasses"
+                    fab:fab_label="@string/lorem_ipsum"
+                    style="@style/MenuButtonsStyle" />
+
+            </com.github.clans.fab.FloatingActionMenu>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
 
 
 </android.support.design.widget.CoordinatorLayout>

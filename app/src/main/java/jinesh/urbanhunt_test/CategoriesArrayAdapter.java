@@ -13,21 +13,24 @@ import java.util.ArrayList;
 /**
  * Created by Jinesh on 20/07/15.
  */
-public class CategoryArrayAdapter extends ArrayAdapter<Category> {
+public class CategoriesArrayAdapter extends ArrayAdapter<Category> {
 
     ArrayList<Category> categoryArrayList;
-    public CategoryArrayAdapter(Context context,ArrayList<Category> categoryArray) {
+//    Context cContext;
+    public CategoriesArrayAdapter(Context context, ArrayList<Category> categoryArray) {
         super(context, 0, categoryArray);
         categoryArrayList = categoryArray;
+//        cContext = context;
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if (convertView == null) {
+//        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_category, parent, false);
-        }
+//        }
 
         ImageView categoryImage = (ImageView)convertView.findViewById(R.id.categoryImage);
         TextView categoryName = (TextView)convertView.findViewById(R.id.categoryName);

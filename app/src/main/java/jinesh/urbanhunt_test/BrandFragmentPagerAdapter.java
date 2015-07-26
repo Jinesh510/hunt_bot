@@ -6,15 +6,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by Jinesh on 21/07/15.
+ * Created by Jinesh on 23/07/15.
  */
-public class HomeFragmentPagerAdapter extends FragmentStatePagerAdapter {
+public class BrandFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[] { "Feed", "Categories", "Stores" };
     private Context context;
 
-    public HomeFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public BrandFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
@@ -42,8 +42,6 @@ public class HomeFragmentPagerAdapter extends FragmentStatePagerAdapter {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-//                fragment = BrandFragment.newInstance();
-//                return fragment;
         }
 
         return null;

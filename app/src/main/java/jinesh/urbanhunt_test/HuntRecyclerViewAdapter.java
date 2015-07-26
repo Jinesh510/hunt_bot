@@ -50,8 +50,6 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
                 }
             });
 
-
-
         }
 
         private void setShareHuntIntent(View view){
@@ -68,10 +66,6 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
 
                 view.getContext().startActivity(Intent.createChooser(shareHuntIntent,"Share Hunt"));
             }
-            else{
-
-            }
-
 
         }
 
@@ -106,11 +100,6 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
         }
 
 
-
-
-
-
-
     }
 
 
@@ -135,7 +124,6 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
         Hunt hunt = hunts.get(position);
         holder.huntTitle.setText(hunt.getTitle());
         Picasso.with(context).load(hunt.getPhotoFile().getUrl()).into(holder.huntImage);
-
 
     }
 

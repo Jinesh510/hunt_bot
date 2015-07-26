@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,19 +20,23 @@ import java.util.ArrayList;
  */
 public class SelectCategoryFragment extends Fragment {
 
-    GridView categoryGrid;
-    LinearLayout CategoryLayout;
-    CategoryArrayAdapter categoryArrayAdapter;
+    private GridView categoryGrid;
+    private LinearLayout CategoryLayout;
+    private CategoriesArrayAdapter categoriesArrayAdapter;
 
     public static SelectCategoryFragment newInstance() {
         SelectCategoryFragment fragment = new SelectCategoryFragment();
-//        Bundle bundle = new Bundle();
-//        fragment.setArguments(bundle);
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
         return fragment;
     }
 
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//    }
 
-    @Nullable
+//    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -41,7 +44,7 @@ public class SelectCategoryFragment extends Fragment {
 
         ArrayList<Category> categoryArray = new ArrayList<>();
 
-        Bitmap clothes  = BitmapFactory.decodeResource(this.getResources(),R.drawable.profile);
+        Bitmap clothes  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.ic_home);
 
         categoryArray.add(new Category("Apparels",clothes));
         categoryArray.add(new Category("Bags",clothes));
@@ -51,9 +54,9 @@ public class SelectCategoryFragment extends Fragment {
         categoryArray.add(new Category("Others",clothes));
 
         categoryGrid = (GridView)CategoryLayout.findViewById(R.id.categoryGrid);
-//        ArrayAdapter<Category> CategoryArrayAdapter = new ArrayAdapter<Category>(getActivity(),R.layout.item_category,categoryArray);
-        categoryArrayAdapter = new CategoryArrayAdapter(getActivity(),categoryArray);
-        categoryGrid.setAdapter(categoryArrayAdapter);
+//        ArrayAdapter<Category> CategoriesArrayAdapter = new ArrayAdapter<Category>(getActivity(),R.layout.item_category,categoryArray);
+        categoriesArrayAdapter = new CategoriesArrayAdapter(getActivity(),categoryArray);
+        categoryGrid.setAdapter(categoriesArrayAdapter);
 
 
         categoryGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

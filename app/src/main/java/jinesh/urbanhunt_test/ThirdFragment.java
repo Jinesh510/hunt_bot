@@ -12,6 +12,13 @@ import android.view.ViewGroup;
  */
 public class ThirdFragment extends Fragment{
 
+    public static ThirdFragment newInstance() {
+        ThirdFragment fragment = new ThirdFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

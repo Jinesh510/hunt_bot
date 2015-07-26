@@ -1,10 +1,12 @@
 package jinesh.urbanhunt_test;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,10 +15,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -37,6 +45,9 @@ public class HuntListActivity extends Fragment {
     private ArrayList<Hunt> hunts;
 
     private String category;
+
+    private RelativeLayout relLay;
+    private FrameLayout oView;
 
     ShowcaseView sv;
 
@@ -77,6 +88,7 @@ public class HuntListActivity extends Fragment {
 
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +96,8 @@ public class HuntListActivity extends Fragment {
 
         fActivity = (FragmentActivity) super.getActivity();
         huntListLayout = (CoordinatorLayout)inflater.inflate(R.layout.hunt_list, container, false);
+        relLay = (RelativeLayout)huntListLayout.findViewById(R.id.relLay);
+        oView = (FrameLayout)huntListLayout.findViewById(R.id.shadowView);
         hunts = new ArrayList<Hunt>();
 
 
@@ -103,66 +117,76 @@ public class HuntListActivity extends Fragment {
 //        rvHunts.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvHunts.setItemAnimator(new DefaultItemAnimator());
 
-        final FloatingActionButton Post = (FloatingActionButton)huntListLayout.findViewById(R.id.post);
-        Post.setOnClickListener(new View.OnClickListener() {
+//        final FloatingActionButton Post = (FloatingActionButton)huntListLayout.findViewById(R.id.post);
+
+
+        final FloatingActionMenu menu = (FloatingActionMenu)huntListLayout.findViewById(R.id.menu2);
+        menu.showMenuButton(true);
+        menu.setClosedOnTouchOutside(true);
+
+        FloatingActionButton fab12 = (FloatingActionButton)huntListLayout.findViewById(R.id.fab12);
+        FloatingActionButton fab22 = (FloatingActionButton)huntListLayout.findViewById(R.id.fab22);
+        FloatingActionButton fab32 = (FloatingActionButton)huntListLayout.findViewById(R.id.fab32);
+
+
+        menu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
+            @Override
+            public void onMenuToggle(boolean opened) {
+                String text = "";
+                if (opened) {
+//                    oView.setVisibility(View.VISIBLE);
+                    oView.setBackgroundColor(Color.parseColor("#b8ffffff"));
+                    text = "Menu opened";
+                } else {
+//                    relLay.setBackgroundColor(Color.TRANSPARENT);
+                    oView.setBackgroundColor(Color.TRANSPARENT);
+                    text = "Menu closed";
+                }
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        final com.github.clans.fab.FloatingActionButton Post =(com.github.clans.fab.FloatingActionButton)huntListLayout.findViewById(R.id.post);
+        fab12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i = new Intent(getActivity(), NewHuntActivity.class);
+                i.putExtra("category","bags");
                 getActivity().startActivity(i);
+
+                ParsePush push = new ParsePush();
+                push.setMessage("The Giants just scored! It's now 2-2 against the Mets.");
+                push.sendInBackground();
+
 
             }
         });
 
+//        com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton fab1 = (com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton)huntListLayout.findViewById(R.id.fab11);
 
-//        SubActionButton.Builder rLSubBuilder = new SubActionButton.Builder(getActivity());
-//        ImageView rlIcon1 = new ImageView(getActivity());
-//        ImageView rlIcon2 = new ImageView(getActivity());
-//        ImageView rlIcon3 = new ImageView(getActivity());
-//        ImageView rlIcon4 = new ImageView(getActivity());
-//
-////        Drawable d = ContextCompat.getDrawable(getActivity(), R.drawable.dress);
-//        rlIcon1.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dress));
-//        rlIcon2.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.watch));
-//        rlIcon3.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.bag));
-//        rlIcon4.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.sunglasses));
+//        ImageView fab = new ImageView(getActivity());
+//        fab.setImageDrawable(getResources().getDrawable(R.drawable.bag, null));
+//        com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton actionBtn = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(getActivity()).setContentView(fab).build();
 //
 //
-//        final FloatingActionMenu rightLowerMenu = new FloatingActionMenu.Builder(getActivity())
-//                .addSubActionView(rLSubBuilder.setContentView(rlIcon1).build())
-//                .addSubActionView(rLSubBuilder.setContentView(rlIcon2).build())
-//                .addSubActionView(rLSubBuilder.setContentView(rlIcon3).build())
-//                .addSubActionView(rLSubBuilder.setContentView(rlIcon4).build())
-//                .attachTo(Post)
-//                .build();
+//        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(getActivity());
 //
-//        rightLowerMenu.setStateChangeListener(new FloatingActionMenu.MenuStateChangeListener() {
-//            @Override
-//            public void onMenuOpened(FloatingActionMenu menu) {
-//                // Rotate the icon of rightLowerButton 45 degrees clockwise
-//                Post.getDrawable().setRotation(0);
-//                PropertyValuesHolder pvhR = PropertyValuesHolder.ofFloat(View.ROTATION, 45);
-//                ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(Post.getDrawable(), pvhR);
-//                animation.start();
-//            }
+//        ImageView fabItem = new ImageView(getActivity());
+//        fabItem.setImageDrawable(getResources().getDrawable(R.drawable.ic_home,null));
+//        SubActionButton button1 = itemBuilder.setContentView(fabItem).build();
 //
-//        }
-
-
-//        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-//        lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-//        int margin = ((Number) (getResources().getDisplayMetrics().density * 12)).intValue();
-//        lps.setMargins(margin, margin, margin, margin);
+//        ImageView fabItem2 = new ImageView(getActivity());
+//        fabItem2.setImageDrawable(getResources().getDrawable(R.drawable.ic_home,null));
+//        SubActionButton button2 = itemBuilder.setContentView(fabItem2).build();
+//
+//        ImageView fabItem3 = new ImageView(getActivity());
+//        fabItem3.setImageDrawable(getResources().getDrawable(R.drawable.ic_home, null));
+//        SubActionButton button3 = itemBuilder.setContentView(fabItem3).build();
 //
 //
-//        ViewTarget viewTarget = new ViewTarget(R.id.post, getActivity());
-//        sv = new ShowcaseView.Builder(getActivity(), true)
-//                .setTarget(viewTarget)
-//                .setContentTitle("Hunt")
-//                .setContentText("Click here to Post")
-//                .build();
-
-//        sv.setButtonPosition(lps);
+//
+//        com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu actionMenu = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu.Builder(getActivity()).addSubActionView(button1).addSubActionView(button2).addSubActionView(button3).attachTo(actionBtn).build();
 
             return huntListLayout;
         }
@@ -192,10 +216,11 @@ public class HuntListActivity extends Fragment {
             @Override
             public void done(List<Hunt> list, ParseException e) {
 
-                for (Hunt h : list){
-
-                    hunts.add(h);
-                }
+//                for (Hunt h : list){
+//
+//                    hunts.add(h);
+//                }
+                hunts = (ArrayList<Hunt>)list;
                 adapterHunts.setHuntList(hunts);
             }
         });

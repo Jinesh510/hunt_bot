@@ -66,9 +66,17 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                mDrawer.openDrawer(GravityCompat.START);
+//                return true;
+//        }
+
 //        int id = item.getItemId();
 
 //        //noinspection SimplifiableIfStatement
@@ -113,26 +121,26 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_home:
-                fragmentClass = HomeFragment.class;
+                fragment = (Fragment) HomeFragment.newInstance();
                 break;
-            case R.id.nav_first_fragment:
-                fragmentClass = FirstFragment.class;
+            case R.id.nav_user:
+                fragment = (Fragment)CUProfilePage.newInstance();
                 break;
             case R.id.nav_second_fragment:
-                fragmentClass = SecondFragment.class;
+                fragment = (Fragment)SecondFragment.newInstance();
                 break;
             case R.id.nav_third_fragment:
-                fragmentClass = ThirdFragment.class;
+                fragment = (Fragment)ThirdFragment.newInstance();
                 break;
             default:
-                fragmentClass = FirstFragment.class;
+                fragment = (Fragment) HomeFragment.newInstance();
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            fragment = (Fragment) fragmentClass.newInstance();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = this.getSupportFragmentManager();

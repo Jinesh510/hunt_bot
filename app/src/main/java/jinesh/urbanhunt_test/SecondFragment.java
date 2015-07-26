@@ -11,6 +11,14 @@ import android.view.ViewGroup;
  * Created by Jinesh on 14/07/15.
  */
 public class SecondFragment extends Fragment{
+
+    public static SecondFragment newInstance() {
+        SecondFragment fragment = new SecondFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -10,17 +10,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
- * Created by Jinesh on 21/07/15.
+ * Created by Jinesh on 23/07/15.
  */
-public class HomeFragment extends Fragment {
+public class BrandFragment extends Fragment {
 
     LinearLayout homeLayout;
-    HomeFragmentPagerAdapter homeFragmentPagerAdapter;
+    BrandFragmentPagerAdapter brandFragmentPagerAdapter;
     ViewPager viewPager;
     TabLayout tabLayout;
 
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
+    public static BrandFragment newInstance() {
+        BrandFragment fragment = new BrandFragment();
 //        Bundle bundle = new Bundle();
 //        fragment.setArguments(bundle);
         return fragment;
@@ -31,34 +31,20 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-//    @Nullable
+    //    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         homeLayout = (LinearLayout)inflater.inflate(R.layout.home,container,false);
 
-        homeFragmentPagerAdapter = new HomeFragmentPagerAdapter(getActivity().getSupportFragmentManager(),this.getActivity());
+        brandFragmentPagerAdapter = new BrandFragmentPagerAdapter(getActivity().getSupportFragmentManager(),this.getActivity());
         viewPager = (ViewPager)homeLayout.findViewById(R.id.viewpager);
 //        viewPager.setAdapter(new HomeFragmentPagerAdapter(getActivity().getSupportFragmentManager(), getActivity()));
 
-        viewPager.setAdapter(homeFragmentPagerAdapter);
+        viewPager.setAdapter(brandFragmentPagerAdapter);
         tabLayout = (TabLayout)homeLayout.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         return homeLayout;
     }
-//
-//    public static String POSITION = "POSITION";
-//
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt(POSITION, tabLayout.getSelectedTabPosition());
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        viewPager.setCurrentItem(savedInstanceState.getInt(POSITION);
-//    }
 }

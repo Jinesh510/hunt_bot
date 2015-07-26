@@ -5,6 +5,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jinesh on 03/07/15.
  */
@@ -15,6 +17,7 @@ public class Hunt extends ParseObject {
         // A default constructor is required.
         super();
     }
+
 
     public String getTitle() {
         return getString("title");
@@ -38,6 +41,14 @@ public class Hunt extends ParseObject {
 
     public void setCategory(String category) {
         put("category", category);
+    }
+
+    public String getTags(){
+        return getString("tags");
+    }
+
+    public void setTags(ArrayList<String> tags){
+        put("tags",tags);
     }
 
     public String getBudget(){
