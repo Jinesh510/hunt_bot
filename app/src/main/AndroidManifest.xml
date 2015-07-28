@@ -57,7 +57,11 @@
             android:label="ProfilePage">
         </activity>
         <activity android:name=".FilterCategories"
-            android:label="FilterCategories">
+            android:label="FilterCategories"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
 
         <service android:name="com.parse.PushService" />
@@ -79,7 +83,7 @@
                 <category android:name="jinesh.urbanhunt_test" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
+        <receiver android:name=".HuntPushBroadcastReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />

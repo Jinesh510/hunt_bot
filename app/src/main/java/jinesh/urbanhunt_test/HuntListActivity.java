@@ -9,26 +9,29 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.parse.FindCallback;
-import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 /**
  * Created by Jinesh on 03/07/15.
@@ -40,14 +43,19 @@ public class HuntListActivity extends Fragment {
     private FragmentActivity fActivity;
 
     private CoordinatorLayout huntListLayout;
-    private RecyclerView rvHunts;
-
+//    private RecyclerView rvHunts;
+    private GridView gvHunts;
     private ArrayList<Hunt> hunts;
 
     private String category;
 
     private RelativeLayout relLay;
     private FrameLayout oView;
+
+    private Date createdAt;
+    private SwipeRefreshLayout swipeContainer;
+    private ParseQueryAdapter.QueryFactory<Hunt> pqf;
+    private CustomParseQueryAdapter customParseQueryAdapter;
 
     ShowcaseView sv;
 
@@ -94,17 +102,23 @@ public class HuntListActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        fActivity = (FragmentActivity) super.getActivity();
+        fActivity = super.getActivity();
+
         huntListLayout = (CoordinatorLayout)inflater.inflate(R.layout.hunt_list, container, false);
+        swipeContainer = (SwipeRefreshLayout) huntListLayout.findViewById(R.id.swipeContainer);
         relLay = (RelativeLayout)huntListLayout.findViewById(R.id.relLay);
         oView = (FrameLayout)huntListLayout.findViewById(R.id.shadowView);
         hunts = new ArrayList<Hunt>();
+        ViewGroup vg;
+        vg = huntListLayout;
 
-
-        rvHunts = (RecyclerView)huntListLayout.findViewById(R.id.rvHunts);
+//        rvHunts = (RecyclerView)huntListLayout.findViewById(R.id.rvHunts);
 //        ArrayList<Hunt> aHunts = new ArrayList<>();
+        gvHunts = (GridView)huntListLayout.findViewById(R.id.gvHunts);
         category = getArguments().getString("category");
-        adapterHunts = new HuntRecyclerViewAdapter(getActivity(),hunts);
+//        adapterHunts = new HuntRecyclerViewAdapter(getActivity(),hunts);
+
+
 
         if(category == "All"){
             fetchHunts();
@@ -112,10 +126,165 @@ public class HuntListActivity extends Fragment {
         else {
             fetchHunts(category);
         }
-        rvHunts.setAdapter(adapterHunts);
-        rvHunts.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-//        rvHunts.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvHunts.setItemAnimator(new DefaultItemAnimator());
+
+        customParseQueryAdapter = new CustomParseQueryAdapter(getActivity(),pqf);
+        customParseQueryAdapter.setObjectsPerPage(6);
+
+//        rvHunts.setAdapter(adapterHunts);
+        gvHunts.setAdapter(customParseQueryAdapter);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                customParseQueryAdapter.loadObjects();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+//        final GridLayoutManager hLinearLayoutManager = new GridLayoutManager(getActivity(),2);
+//        rvHunts.setLayoutManager(hLinearLayoutManager);
+////        rvHunts.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        rvHunts.setItemAnimator(new DefaultItemAnimator());
+
+        /*Implemetented on pull refresh */
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                Log.d("isRefreshing", "" + swipeContainer.isRefreshing());
+//
+////                rvHunts.onScrolled(0,5);
+//                adapterHunts.clear();
+//                fetchHunts();
+//                swipeContainer.setRefreshing(false);
+//
+////                rvHunts.setAdapter(adapterHunts);
+////                rvHunts.setLayoutManager(hLinearLayoutManager);
+//////        rvHunts.setLayoutManager(new LinearLayoutManager(getActivity()));
+////                rvHunts.setItemAnimator(new DefaultItemAnimator());
+//                Log.d("refreshed", "" + hunts.size());
+//                Log.d("isRefreshed", ""+swipeContainer.isRefreshing());
+//            }
+//        });
+
+
+//        rvHunts.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//
+//            private int previousTotal = 0; // The total number of items in the dataset after the last load
+//            private boolean loading = true; // True if we are still waiting for the last set of data to load.
+//            private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
+//            int firstVisibleItem, visibleItemCount, totalItemCount,lastVisibleItem;
+//            int skipCount;
+//
+//            private int current_page = 1;
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//
+//
+//                visibleItemCount = recyclerView.getChildCount();
+//                totalItemCount = hLinearLayoutManager.getItemCount();
+//                firstVisibleItem = hLinearLayoutManager.findFirstVisibleItemPosition();
+//                lastVisibleItem = hLinearLayoutManager.findLastVisibleItemPosition();
+//                int t = 0;
+//
+//
+////                if(!swipeContainer.isRefreshing()){
+////                    previousTotal = 0;
+////                    totalItemCount = hLinearLayoutManager.getItemCount();
+////                    firstVisibleItem = hLinearLayoutManager.findFirstVisibleItemPosition();
+////                    Log.d("rtotalItemCount1", "" + totalItemCount);
+////                    Log.d("rvisibleItemCount1",""+visibleItemCount);
+////                    Log.d("rfirstVisibleItem1",""+firstVisibleItem);
+////
+////                };
+//
+//                if (firstVisibleItem == 0){
+//                    swipeContainer.setEnabled(true);
+////                    previousTotal = 0;
+//                    Log.d("loading","" + loading);
+//
+//                    Log.d("totalItemCount1", "" + totalItemCount);
+//                    Log.d("visibleItemCount1",""+visibleItemCount);
+//                    Log.d("firstVisibleItem1",""+firstVisibleItem);
+//                    Log.d("previousTotal1",""+previousTotal);
+//                }
+//                else{
+//                    swipeContainer.setEnabled(false);
+//                }
+//
+//
+//
+//                if (loading) {
+//                    if (totalItemCount == lastVisibleItem) {
+//                        loading = false;
+////                        lastVisibleItem = totalItemCount;
+//
+//                        Log.d("totalItemCount",""+totalItemCount);
+//                        Log.d("visibleItemCount",""+visibleItemCount);
+//                        Log.d("firstVisibleItem",""+firstVisibleItem);
+//                        Log.d("lastvisibleItem",""+lastVisibleItem);
+//                        Log.d("scroll","true");
+//
+////                        previousTotal = totalItemCount;
+//
+//                    }
+//                }
+//                if (!loading && (totalItemCount - visibleItemCount)
+//                        <= (firstVisibleItem + visibleThreshold)) {
+//                    // End has been reached
+//
+////                    ParseQuery<Hunt> huntParseQuery1 = ParseQuery.getQuery(Hunt.class);
+////                    huntParseQuery1.whereLessThan("createdAt", createdAt);
+////                    try {
+////                        t = huntParseQuery1.count();
+////                    } catch (ParseException e) {
+////                        e.printStackTrace();
+////                    }
+////
+////                    // Do something
+////                    if(t > totalItemCount){
+////
+////                    }
+//                    Log.d("loaded", "" + loading);
+//                    current_page++;
+//
+//                    skipCount = (current_page-1)*5;
+//                    Log.d("skipCount",""+skipCount);
+//                    Log.d("cp",""+current_page);
+//
+//                    ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
+//                    huntParseQuery.orderByDescending("createdAt");
+//                    huntParseQuery.whereLessThan("createdAt",createdAt);
+//                    huntParseQuery.setSkip(skipCount);
+//                    huntParseQuery.setLimit(5);
+//                    huntParseQuery.findInBackground(new FindCallback<Hunt>() {
+//                        @Override
+//                        public void done(List<Hunt> list, ParseException e) {
+//
+//                            for (Hunt h : list) {
+//
+//                                hunts.add(h);
+//                                Log.d("huntSize" , ""+hunts.size());
+//                            }
+////                            hunts = (ArrayList<Hunt>)list;
+//                            adapterHunts.setHuntList(hunts);
+//
+//                        }
+//                    });
+//
+//                    Log.d("scrolled", "true");
+//
+//                    loading = true;
+//                }
+//
+//
+//            }
+//        });
+
+
+
 
 //        final FloatingActionButton Post = (FloatingActionButton)huntListLayout.findViewById(R.id.post);
 
@@ -152,11 +321,26 @@ public class HuntListActivity extends Fragment {
             public void onClick(View view) {
 
                 Intent i = new Intent(getActivity(), NewHuntActivity.class);
-                i.putExtra("category","bags");
+                i.putExtra("category", "bags");
                 getActivity().startActivity(i);
 
+//                ParseQuery<ParseUser> userFollowQuery = ParseUser.getQuery();
+//                userFollowQuery.getInBackground("otkEjMPx9r",);
+
+                ParseQuery pushQuery = ParseInstallation.getQuery();
+                pushQuery.whereEqualTo("installationId", "71c47d03-128e-49c1-ab04-5bcbcff508ca");
+
+                JSONObject data = null;
+                try {
+                    data = new JSONObject("{\"id\":\"1\"}");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 ParsePush push = new ParsePush();
-                push.setMessage("The Giants just scored! It's now 2-2 against the Mets.");
+                push.setQuery(pushQuery);
+//                push.setMessage("The Giants just scored! It's now 2-2 against the Mets.");
+                push.setData(data);
                 push.sendInBackground();
 
 
@@ -191,41 +375,72 @@ public class HuntListActivity extends Fragment {
             return huntListLayout;
         }
 
-    private void fetchHunts(String categoryName) {
+    private void fetchHunts(final String categoryName) {
+//
+//            ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
+//            huntParseQuery.whereEqualTo("category",categoryName);
+//            huntParseQuery.findInBackground(new FindCallback<Hunt>() {
+//                @Override
+//                public void done(List<Hunt> list, ParseException e) {
+//
+//                    for (Hunt h : list) {
+//
+//                        hunts.add(h);
+//                    }
+//                    adapterHunts.setHuntList(hunts);
+//                }
+//            });
 
-            ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
-            huntParseQuery.whereEqualTo("category",categoryName);
-            huntParseQuery.findInBackground(new FindCallback<Hunt>() {
-                @Override
-                public void done(List<Hunt> list, ParseException e) {
+        pqf = new ParseQueryAdapter.QueryFactory<Hunt>() {
+            @Override
+            public ParseQuery<Hunt> create() {
+                ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
+                huntParseQuery.orderByDescending("createdAt");
+                huntParseQuery.whereEqualTo("category", categoryName);
+                huntParseQuery.whereNotEqualTo("author", ParseUser.getCurrentUser());
 
-                    for (Hunt h : list){
 
-                        hunts.add(h);
-                    }
-                    adapterHunts.setHuntList(hunts);
-                }
-            });
+                return huntParseQuery;
+            }
+        };
 
     }
 
     private void fetchHunts() {
 
-        ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
-        huntParseQuery.findInBackground(new FindCallback<Hunt>() {
-            @Override
-            public void done(List<Hunt> list, ParseException e) {
-
-//                for (Hunt h : list){
+//        ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
+//        huntParseQuery.orderByDescending("createdAt");
+//        huntParseQuery.setLimit(5);
+//        huntParseQuery.findInBackground(new FindCallback<Hunt>() {
+//            @Override
+//            public void done(List<Hunt> list, ParseException e) {
+//
+//                for (Hunt h : list) {
 //
 //                    hunts.add(h);
+//                    Log.d("size", hunts.size() + "");
 //                }
-                hunts = (ArrayList<Hunt>)list;
-                adapterHunts.setHuntList(hunts);
-            }
-        });
+////                hunts = (ArrayList<Hunt>)list;
+//                adapterHunts.setHuntList(hunts);
+//                Hunt hunt = hunts.get(0);
+//                createdAt = hunt.getCreatedAt();
+//                Log.d("created at", "" + createdAt);
+//            }
+//        });
 
+        pqf = new ParseQueryAdapter.QueryFactory<Hunt>() {
+            @Override
+            public ParseQuery<Hunt> create() {
+                ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
+                huntParseQuery.whereNotEqualTo("author", ParseUser.getCurrentUser());
+                huntParseQuery.orderByDescending("createdAt");
+
+                return huntParseQuery;
+            }
+        };
     }
+
+
 
 
 

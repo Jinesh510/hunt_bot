@@ -38,18 +38,18 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
 
         public ViewHolder(View itemView){
             super(itemView);
-            this.huntCard = (CardView)itemView.findViewById(R.id.huntCard);
+//            this.huntCard = (CardView)itemView.findViewById(R.id.huntCard);
             this.huntTitle = (TextView)itemView.findViewById(R.id.huntTitle);
             this.huntImage = (ImageView)itemView.findViewById(R.id.huntImage);
-            this.shareHunt = (ImageView)itemView.findViewById(R.id.shareHunt);
+//            this.shareHunt = (ImageView)itemView.findViewById(R.id.shareHunt);
 
-            shareHunt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    setShareHuntIntent(view);
-                }
-            });
-
+//            shareHunt.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    setShareHuntIntent(view);
+//                }
+//            });
+//
         }
 
         private void setShareHuntIntent(View view){
@@ -61,7 +61,7 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
                 shareHuntIntent.setAction(Intent.ACTION_SEND);
                 shareHuntIntent.putExtra(Intent.EXTRA_STREAM, huntUri);
                 shareHuntIntent.setType("*/*");
-                shareHuntIntent.putExtra(Intent.EXTRA_TEXT,huntTitle.getText().toString());
+                shareHuntIntent.putExtra(Intent.EXTRA_TEXT, huntTitle.getText().toString());
 
 
                 view.getContext().startActivity(Intent.createChooser(shareHuntIntent,"Share Hunt"));
@@ -112,15 +112,15 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
     }
 
     @Override
-    public HuntRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView  = LayoutInflater.from(context).inflate(R.layout.item_hunt_row, parent, false);
 
-        return new HuntRecyclerViewAdapter.ViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(HuntRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Hunt hunt = hunts.get(position);
         holder.huntTitle.setText(hunt.getTitle());
         Picasso.with(context).load(hunt.getPhotoFile().getUrl()).into(holder.huntImage);
@@ -138,6 +138,11 @@ public class HuntRecyclerViewAdapter extends RecyclerView.Adapter<HuntRecyclerVi
     public int getItemCount() {
 
         return hunts.size();
+    }
+
+    public void clear() {
+        hunts.clear();
+        notifyDataSetChanged();
     }
 
 
