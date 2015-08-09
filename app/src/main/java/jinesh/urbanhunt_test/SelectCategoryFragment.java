@@ -44,12 +44,12 @@ public class SelectCategoryFragment extends Fragment {
 
         ArrayList<Category> categoryArray = new ArrayList<>();
 
-        Bitmap apparels  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.apparels);
-        Bitmap bags  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.bags);
-        Bitmap beauty  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.beauty);
-        Bitmap accesories  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.accesories);
-        Bitmap footwear  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.footwear);
-        Bitmap watches  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.watches);
+        Bitmap apparels  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.apparels_cat);
+        Bitmap bags  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.bags_cat);
+        Bitmap beauty  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.beauty_cat);
+        Bitmap accesories  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.accesories_cat);
+        Bitmap footwear  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.footwear_cat);
+        Bitmap watches  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.watches_cat);
 
 
         categoryArray.add(new Category("Apparels",apparels));

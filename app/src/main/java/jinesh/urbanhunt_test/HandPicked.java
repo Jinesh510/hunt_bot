@@ -25,11 +25,11 @@ public class HandPicked extends Activity {
         cardContainer = (CardContainer)findViewById(R.id.layoutview);
 
         SimpleCardStackAdapter adapter = new SimpleCardStackAdapter(this);
-        adapter.add(new CardModel("Accesories", "Description goes here", getResources().getDrawable(R.drawable.accesories,null)));
-        adapter.add(new CardModel("Apparels", "Description goes here", getResources().getDrawable(R.drawable.apparels,null)));
-        adapter.add(new CardModel("Title1", "Description goes here", getResources().getDrawable(R.drawable.bags,null)));
+        adapter.add(new CardModel("Accesories", "Description goes here", getResources().getDrawable(R.drawable.accesories_cat,null)));
+        adapter.add(new CardModel("Apparels", "Description goes here", getResources().getDrawable(R.drawable.apparels_cat,null)));
+        adapter.add(new CardModel("Title1", "Description goes here", getResources().getDrawable(R.drawable.bags_cat,null)));
 
-        CardModel cardModel = new CardModel("Title1", "Description goes here", getResources().getDrawable(R.drawable.beauty, null));
+        CardModel cardModel = new CardModel("Title1", "Description goes here", getResources().getDrawable(R.drawable.beauty_cat, null));
         cardModel.setOnClickListener(new CardModel.OnClickListener() {
             @Override
             public void OnClickListener() {
