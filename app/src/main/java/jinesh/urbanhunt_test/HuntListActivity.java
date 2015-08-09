@@ -1,6 +1,7 @@
 package jinesh.urbanhunt_test;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Jinesh on 03/07/15.
@@ -81,6 +83,7 @@ public class HuntListActivity extends Fragment {
 //        fetchHunts();
 //
 //    }
+    int page = 1;
 
     public static HuntListActivity newInstance( String category) {
         HuntListActivity fragment = new HuntListActivity();
@@ -109,14 +112,16 @@ public class HuntListActivity extends Fragment {
         relLay = (RelativeLayout)huntListLayout.findViewById(R.id.relLay);
         oView = (FrameLayout)huntListLayout.findViewById(R.id.shadowView);
         hunts = new ArrayList<Hunt>();
-        ViewGroup vg;
-        vg = huntListLayout;
+//        ViewGroup vg;
+//        vg = huntListLayout;
 
 //        rvHunts = (RecyclerView)huntListLayout.findViewById(R.id.rvHunts);
 //        ArrayList<Hunt> aHunts = new ArrayList<>();
         gvHunts = (GridView)huntListLayout.findViewById(R.id.gvHunts);
         category = getArguments().getString("category");
 //        adapterHunts = new HuntRecyclerViewAdapter(getActivity(),hunts);
+
+
 
 
 
@@ -127,10 +132,43 @@ public class HuntListActivity extends Fragment {
             fetchHunts(category);
         }
 
+
+        final ProgressDialog p = new ProgressDialog(getActivity());
+
+
         customParseQueryAdapter = new CustomParseQueryAdapter(getActivity(),pqf);
-        customParseQueryAdapter.setObjectsPerPage(6);
+//        customParseQueryAdapter = new CustomParseQueryAdapter(getActivity(), new ParseQueryAdapter.QueryFactory<Hunt>() {
+//            @Override
+//            public ParseQuery<Hunt> create() {
+//                return huntParseQuery;
+//            }
+//        });
+
+
+
+
+
+//        customParseQueryAdapter.setPaginationEnabled(false);
+//        customParseQueryAdapter.setAutoload(false);
+        customParseQueryAdapter.setObjectsPerPage(10);
+//        customParseQueryAdapter.setPaginationEnabled(false);
 
 //        rvHunts.setAdapter(adapterHunts);
+//        customParseQueryAdapter.setPageOnQuery(page, huntParseQuery);
+        customParseQueryAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<Hunt>() {
+            @Override
+            public void onLoading() {
+                p.show();
+            }
+
+            @Override
+            public void onLoaded(List<Hunt> list, Exception e) {
+
+                p.hide();
+
+
+            }
+        });
         gvHunts.setAdapter(customParseQueryAdapter);
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -140,6 +178,29 @@ public class HuntListActivity extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
+
+
+
+
+//        gvHunts.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView absListView, int i) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+//                if (absListView.getLastVisiblePosition()==absListView.getChildCount()) {
+//                    page = page + 1;
+//                    customParseQueryAdapter.setObjectsPerPage(6);
+//                    customParseQueryAdapter.setPageOnQuery(page,huntParseQuery);
+//                    gvHunts.setAdapter(customParseQueryAdapter);
+//
+//                    Log.d("s", "scrolled");
+//                }
+//            }
+//        });
+
 //        final GridLayoutManager hLinearLayoutManager = new GridLayoutManager(getActivity(),2);
 //        rvHunts.setLayoutManager(hLinearLayoutManager);
 ////        rvHunts.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -303,11 +364,9 @@ public class HuntListActivity extends Fragment {
             public void onMenuToggle(boolean opened) {
                 String text = "";
                 if (opened) {
-//                    oView.setVisibility(View.VISIBLE);
                     oView.setBackgroundColor(Color.parseColor("#b8ffffff"));
                     text = "Menu opened";
                 } else {
-//                    relLay.setBackgroundColor(Color.TRANSPARENT);
                     oView.setBackgroundColor(Color.TRANSPARENT);
                     text = "Menu closed";
                 }
@@ -434,6 +493,7 @@ public class HuntListActivity extends Fragment {
                 ParseQuery<Hunt> huntParseQuery = ParseQuery.getQuery(Hunt.class);
                 huntParseQuery.whereNotEqualTo("author", ParseUser.getCurrentUser());
                 huntParseQuery.orderByDescending("createdAt");
+//                huntParseQuery.setLimit(5);
 
                 return huntParseQuery;
             }

@@ -50,5 +50,7 @@ dependencies {
     compile 'com.github.clans:fab:1.5.5'
     compile 'com.github.blazsolar:FlowLayout:v0.4.0'
     compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.github.kikoso:SwipeableCards:1.1-RELEASE@aar'
+    compile 'com.flaviofaria:kenburnsview:1.0.6'
 
 }

@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -17,11 +19,18 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
         super(context, queryFactory);
     }
 
-    public static class ViewHolder2 {
+    public CustomParseQueryAdapter(Context context, Class<? extends ParseObject> clazz) {
+        super(context, clazz);
+    }
+
+        public static class ViewHolder2 {
          TextView huntTitle1;
          ImageView huntImage1;
 
     }
+//
+//    TextView huntTitle1;
+//    ImageView huntImage1;
 
     @Override
     public View getItemView(Hunt object, View v, ViewGroup parent) {
@@ -37,17 +46,23 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
         else {
             viewHolder = (ViewHolder2)v.getTag();
         }
-
-//        TextView huntTitle = (TextView)v.findViewById(R.id.huntTitle);
-//        ImageView huntImage = (ImageView)v.findViewById(R.id.huntImage);
+//
+//        if(v==null){
+//            v= View.inflate(getContext(), R.layout.item_hunt_row, parent);
+//        }
+//
+//        huntTitle1 = (TextView)v.findViewById(R.id.huntTitle);
+//        huntImage1 = (ImageView)v.findViewById(R.id.huntImage);
 
         viewHolder.huntTitle1.setText(object.getTitle());
-        Picasso.with(getContext()).load(object.getPhotoFile().getUrl()).into(viewHolder.huntImage1);
 
+        Picasso.with(getContext()).load(object.getPhotoFile().getUrl()).into(viewHolder.huntImage1);
+        Picasso.with(getContext()).setIndicatorsEnabled(true);
 
         return v;
 
     }
+
 
     @Override
     public void loadNextPage() {
@@ -60,8 +75,24 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+    @Override
     public void setObjectsPerPage(int objectsPerPage) {
         super.setObjectsPerPage(objectsPerPage);
     }
 
+    @Override
+    protected void setPageOnQuery(int page, ParseQuery<Hunt> query) {
+        super.setPageOnQuery(page, query);
+    }
+
+    @Override
+    public void addOnQueryLoadListener(OnQueryLoadListener<Hunt> listener) {
+        super.addOnQueryLoadListener(listener);
+    }
 }
+
+

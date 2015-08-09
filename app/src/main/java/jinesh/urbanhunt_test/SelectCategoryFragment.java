@@ -44,14 +44,20 @@ public class SelectCategoryFragment extends Fragment {
 
         ArrayList<Category> categoryArray = new ArrayList<>();
 
-        Bitmap clothes  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.ic_home);
+        Bitmap apparels  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.apparels);
+        Bitmap bags  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.bags);
+        Bitmap beauty  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.beauty);
+        Bitmap accesories  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.accesories);
+        Bitmap footwear  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.footwear);
+        Bitmap watches  = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.watches);
 
-        categoryArray.add(new Category("Apparels",clothes));
-        categoryArray.add(new Category("Bags",clothes));
-        categoryArray.add(new Category("Beauty",clothes));
-        categoryArray.add(new Category("Accessories",clothes));
-        categoryArray.add(new Category("Jewellery",clothes));
-        categoryArray.add(new Category("Others",clothes));
+
+        categoryArray.add(new Category("Apparels",apparels));
+        categoryArray.add(new Category("Bags",bags));
+        categoryArray.add(new Category("Beauty",beauty));
+        categoryArray.add(new Category("Accessories",accesories));
+        categoryArray.add(new Category("Footwear",footwear));
+        categoryArray.add(new Category("Others",watches));
 
         categoryGrid = (GridView)CategoryLayout.findViewById(R.id.categoryGrid);
 //        ArrayAdapter<Category> CategoriesArrayAdapter = new ArrayAdapter<Category>(getActivity(),R.layout.item_category,categoryArray);
