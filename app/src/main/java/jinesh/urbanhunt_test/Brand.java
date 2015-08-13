@@ -19,6 +19,11 @@ public class Brand extends ParseObject{
     }
 
     public ParseFile getLogo(){
-        return getParseFile("brandLogo");
+        return getParseFile("logo");
+    }
+
+    public String getCategoryName(){
+        return getString("brandCategoryName");
     }
 }
+

@@ -6,26 +6,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.squareup.picasso.Picasso;
 
 /**
- * Created by Jinesh on 28/07/15.
+ * Created by Jinesh on 10/08/15.
  */
-public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
-    public CustomParseQueryAdapter(Context context, QueryFactory<Hunt> queryFactory) {
+public class ProductAdapter extends ParseQueryAdapter<Product_1> {
+    public ProductAdapter(Context context, QueryFactory<Product_1> queryFactory) {
         super(context, queryFactory);
     }
 
-    public CustomParseQueryAdapter(Context context, Class<? extends ParseObject> clazz) {
-        super(context, clazz);
-    }
 
-        public static class ViewHolder2 {
-         TextView huntTitle1;
-         ImageView huntImage1;
+    public static class ViewHolder_2 {
+        TextView productPrice;
+        ImageView productImage;
 
     }
 //
@@ -33,18 +29,18 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
 //    ImageView huntImage1;
 
     @Override
-    public View getItemView(Hunt object, View v, ViewGroup parent) {
+    public View getItemView(Product_1 object, View v, ViewGroup parent) {
 
-        ViewHolder2 viewHolder;
+        ViewHolder_2 viewHolder;
         if (v == null) {
-            viewHolder = new ViewHolder2();
-            v = View.inflate(getContext(), R.layout.item_hunt_row, null);
-            viewHolder.huntTitle1 = (TextView)v.findViewById(R.id.huntTitle);
-            viewHolder.huntImage1 = (ImageView)v.findViewById(R.id.huntImage);
+            viewHolder = new ViewHolder_2();
+            v = View.inflate(getContext(), R.layout.product_item, null);
+            viewHolder.productPrice = (TextView)v.findViewById(R.id.productPrice);
+            viewHolder.productImage = (ImageView)v.findViewById(R.id.productImage);
             v.setTag(viewHolder);
         }
         else {
-            viewHolder = (ViewHolder2)v.getTag();
+            viewHolder = (ViewHolder_2)v.getTag();
         }
 //
 //        if(v==null){
@@ -54,9 +50,9 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
 //        huntTitle1 = (TextView)v.findViewById(R.id.huntTitle);
 //        huntImage1 = (ImageView)v.findViewById(R.id.huntImage);
 
-        viewHolder.huntTitle1.setText(object.getTitle());
+        viewHolder.productPrice.setText(object.getPrice());
 
-        Picasso.with(getContext()).load(object.getPhotoFile().getUrl()).into(viewHolder.huntImage1);
+        Picasso.with(getContext()).load(object.getProductImage().getUrl()).into(viewHolder.productImage);
         Picasso.with(getContext()).setIndicatorsEnabled(true);
 
         return v;
@@ -83,14 +79,12 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
     }
 
     @Override
-    protected void setPageOnQuery(int page, ParseQuery<Hunt> query) {
+    protected void setPageOnQuery(int page, ParseQuery<Product_1> query) {
         super.setPageOnQuery(page, query);
     }
 
     @Override
-    public void addOnQueryLoadListener(OnQueryLoadListener<Hunt> listener) {
+    public void addOnQueryLoadListener(OnQueryLoadListener<Product_1> listener) {
         super.addOnQueryLoadListener(listener);
     }
 }
-
-

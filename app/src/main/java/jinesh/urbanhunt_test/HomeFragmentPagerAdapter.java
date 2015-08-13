@@ -34,14 +34,9 @@ public class HomeFragmentPagerAdapter extends FragmentStatePagerAdapter {
                 fragment = SelectCategoryFragment.newInstance();
                 return fragment;
             case 2:
-                try {
-                    fragment = FirstFragment.class.newInstance();
-                    return fragment;
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                fragment = BrandFragment.newInstance();
+                return fragment;
+
 //                fragment = BrandFragment.newInstance();
 //                return fragment;
         }

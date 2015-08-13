@@ -62,7 +62,17 @@
             android:name=".HandPicked"
             android:label="HandPicked">
         </activity>
-        <activity android:name=".FilterCategories"
+        <activity
+            android:name=".FavouriteTags"
+            android:label="FavouriteTags">
+        </activity>
+
+        <activity
+            android:name=".BrandProfilePage"
+            android:label="BrandProfilePage">
+        </activity>
+
+        <activity android:name=".FilterCategoriesActivity"
             android:label="FilterCategories"
             android:parentActivityName=".MainActivity">
             <meta-data

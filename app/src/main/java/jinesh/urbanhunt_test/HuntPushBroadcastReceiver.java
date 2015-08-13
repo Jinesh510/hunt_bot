@@ -43,10 +43,10 @@ public class HuntPushBroadcastReceiver extends ParsePushBroadcastReceiver {
     }
 
     public void m1(Context context) {
-        Intent resultIntent = new Intent(context, FilterCategories.class);
+        Intent resultIntent = new Intent(context, FilterCategoriesActivity.class);
         resultIntent.putExtra("category","bags");
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(FilterCategories.class);
+        stackBuilder.addParentStack(FilterCategoriesActivity.class);
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);

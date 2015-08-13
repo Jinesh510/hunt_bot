@@ -19,6 +19,7 @@ public class HomeFragment extends Fragment {
     ViewPager viewPager;
     TabLayout tabLayout;
 
+
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
 //        Bundle bundle = new Bundle();

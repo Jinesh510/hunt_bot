@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="50dp">
+
+    <com.anton46.collectionitempicker.CollectionPicker
+        android:id="@+id/collection_item_picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cp_addIcon="@android:drawable/ic_menu_add"
+        app:cp_cancelIcon="@android:drawable/ic_menu_close_clear_cancel"
+        app:cp_itemBackgroundNormal="@color/blue"
+        app:cp_itemBackgroundPressed="@color/red"
+        app:cp_itemMargin="5dp"
+        app:cp_textPaddingBottom="5dp"
+        app:cp_textPaddingLeft="10dp"
+        app:cp_textPaddingRight="10dp"
+        app:cp_textPaddingTop="5dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/selectFavTags"
+        android:layout_below="@+id/collection_item_picker"
+        android:layout_alignParentBottom="true"
+        android:text="Select"/>
+
+</RelativeLayout>

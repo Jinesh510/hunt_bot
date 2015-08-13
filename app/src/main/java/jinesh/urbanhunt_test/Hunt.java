@@ -23,6 +23,7 @@ public class Hunt extends ParseObject {
         return getString("title");
     }
 
+
     public void setTitle(String title) {
         put("title", title);
     }
@@ -69,6 +70,7 @@ public class Hunt extends ParseObject {
 
     public ParseFile getPhotoFile() {
         return getParseFile("photo");
+
     }
 
     public void setPhotoFile(ParseFile file) {

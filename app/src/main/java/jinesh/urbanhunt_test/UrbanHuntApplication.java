@@ -24,6 +24,13 @@ public class UrbanHuntApplication extends Application {
 
         ParseObject.registerSubclass(Hunt.class);
 
+        ParseObject.registerSubclass(Product_1.class);
+
+        ParseObject.registerSubclass(Brand.class);
+
+        ParseObject.registerSubclass(Store.class);
+
+
         Parse.initialize(this, "Jx9KzZNE3SHq8PXMVUlTgdqza0yFiNUyH7vdECOB", "tc3GyC7gvGZgexIOFKgE9gOwq8GJ0CFYThrmIlCa");
 
         ParseUser.enableAutomaticUser();

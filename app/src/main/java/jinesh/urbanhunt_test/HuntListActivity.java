@@ -150,8 +150,9 @@ public class HuntListActivity extends Fragment {
 
 //        customParseQueryAdapter.setPaginationEnabled(false);
 //        customParseQueryAdapter.setAutoload(false);
-        customParseQueryAdapter.setObjectsPerPage(10);
-//        customParseQueryAdapter.setPaginationEnabled(false);
+        customParseQueryAdapter.setObjectsPerPage(8);
+
+        customParseQueryAdapter.setPaginationEnabled(true);
 
 //        rvHunts.setAdapter(adapterHunts);
 //        customParseQueryAdapter.setPageOnQuery(page, huntParseQuery);

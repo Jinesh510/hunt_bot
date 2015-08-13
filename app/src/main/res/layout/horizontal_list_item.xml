@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/hlvHuntImage"
+        android:id="@+id/hlvImage"
         android:maxHeight="150dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"

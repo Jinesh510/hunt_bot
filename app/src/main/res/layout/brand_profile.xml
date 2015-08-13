@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:id="@+id/brandData"
+        android:layout_below="@+id/toolbar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/brandLogo"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/brandName"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/favBrand"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:src="@drawable/fav"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/storeList"
+        android:layout_below="@+id/brandData"></ListView>
+
+    <jinesh.urbanhunt_test.HorizontalListView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/brandPop"
+        android:layout_below="@+id/storeList">
+    </jinesh.urbanhunt_test.HorizontalListView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnBrandCollection"
+        android:text="View All Products"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/brandPop"/>
+</LinearLayout>

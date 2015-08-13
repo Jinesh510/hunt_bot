@@ -17,6 +17,10 @@ public class Store extends ParseObject{
         return getString("storeName");
     }
 
+    public String getBrandName(){
+        return getString("storeBrand");
+    }
+
     public String getAddress(){
         return getString("storeAddress");
     }

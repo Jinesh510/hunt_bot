@@ -14,9 +14,9 @@ import java.util.ArrayList;
 /**
  * Created by Jinesh on 10/07/15.
  */
-public class HuntImageAdapter extends ArrayAdapter<Hunt> {
+public class HorizontalImageAdapter extends ArrayAdapter<Product_1> {
 
-//    public HuntImageAdapter(Context context,ArrayList<Hunt> imgHunts) {
+//    public HorizontalImageAdapter(Context context,ArrayList<Hunt> imgHunts) {
 //        super(context,0, imgHunts);
 //    }
 //
@@ -28,7 +28,7 @@ public class HuntImageAdapter extends ArrayAdapter<Hunt> {
 //
 //        if (convertView ==null){
 //            LayoutInflater inflater = LayoutInflater.from(getContext());
-//            convertView = inflater.inflate(R.layout.hunt_horizontal_item,parent,false);
+//            convertView = inflater.inflate(R.layout.horizontal_list_item,parent,false);
 //        }
 //
 //        //Lookup views in item layout
@@ -50,11 +50,11 @@ public class HuntImageAdapter extends ArrayAdapter<Hunt> {
 //
 //    }
 
-    ArrayList<Hunt> huntArrayList;
+    ArrayList<Product_1> hlvImageArrayList;
 
-    public HuntImageAdapter(Context context, ArrayList<Hunt> imgHunts) {
-        super(context, 0, imgHunts);
-        huntArrayList = imgHunts;
+    public HorizontalImageAdapter(Context context, ArrayList<Product_1> brandPopList) {
+        super(context, 0, brandPopList);
+        hlvImageArrayList = brandPopList;
     }
 
 
@@ -65,12 +65,12 @@ public class HuntImageAdapter extends ArrayAdapter<Hunt> {
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.hunt_horizontal_item, parent, false);
+            convertView = inflater.inflate(R.layout.horizontal_list_item, parent, false);
         }
 
         //Lookup views in item layout
 
-        ImageView hlvHuntImage = (ImageView) convertView.findViewById(R.id.hlvHuntImage);
+        ImageView hlvImage = (ImageView) convertView.findViewById(R.id.hlvImage);
 
 
 //        ParseImageView huntImage = (ParseImageView)convertView.findViewById(R.id.huntImage);
@@ -78,15 +78,15 @@ public class HuntImageAdapter extends ArrayAdapter<Hunt> {
         //loading data into template
 
 
-        Picasso.with(getContext()).load(huntArrayList.get(position).getPhotoFile().getUrl()).into(hlvHuntImage);
+        Picasso.with(getContext()).load(hlvImageArrayList.get(position).getProductImage().getUrl()).into(hlvImage);
 
         return convertView;
 
 //        return super.getView(position, convertView, parent);
     }
 
-    public void setHuntList(ArrayList<Hunt> huntList) {
-        huntArrayList = huntList;
+    public void setImageList(ArrayList<Product_1> huntList) {
+        hlvImageArrayList = huntList;
         notifyDataSetChanged();
     }
 
