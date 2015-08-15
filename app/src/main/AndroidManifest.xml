@@ -29,6 +29,7 @@
         android:theme="@style/AppTheme"
         tools:replace = "android:icon">
         <activity
+
             android:name=".SplashScreen"
             android:label="Splash_Screen">
 
@@ -37,6 +38,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <data android:scheme="urbanhunt_test" android:host="open" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".CollapseActivity"
+            android:label="CollapseActivity">
         </activity>
         <!--<activity-->
             <!--android:name=".HuntListActivity"-->
@@ -68,8 +81,8 @@
         </activity>
 
         <activity
-            android:name=".BrandProfilePage"
-            android:label="BrandProfilePage">
+            android:name=".BrandActivity"
+            android:label="BrandActivity">
         </activity>
 
         <activity android:name=".FilterCategoriesActivity"
@@ -108,6 +121,10 @@
         </receiver>
 
         <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/ic_push"/>
+
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="true" /> <!-- Set to true to use Branch_Test_Key -->
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_mggJkY6gevwBNziFfXh7Nebixxptxxw0" />
+        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_ampMeY9movEDIznEp4j8VeonzuiCxArJ" />
     </application>
 
 </manifest>

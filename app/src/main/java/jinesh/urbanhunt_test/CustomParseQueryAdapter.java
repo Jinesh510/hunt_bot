@@ -19,6 +19,7 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
         super(context, queryFactory);
     }
 
+
     public CustomParseQueryAdapter(Context context, Class<? extends ParseObject> clazz) {
         super(context, clazz);
     }
@@ -57,7 +58,7 @@ public class CustomParseQueryAdapter extends ParseQueryAdapter<Hunt> {
         viewHolder.huntTitle1.setText(object.getTitle());
 
         Picasso.with(getContext()).load(object.getPhotoFile().getUrl()).into(viewHolder.huntImage1);
-        Picasso.with(getContext()).setIndicatorsEnabled(true);
+//        Picasso.with(getContext()).setIndicatorsEnabled(true);
 
         return v;
 

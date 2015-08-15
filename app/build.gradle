@@ -40,6 +40,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: 'bolts-android-1.2.0.jar')
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile files('libs/picasso-2.5.2.jar')
+    compile files('libs/Branch-1.8.6.jar')
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:percent:22.2.0'
@@ -54,6 +55,4 @@ dependencies {
     compile 'com.flaviofaria:kenburnsview:1.0.6'
     compile 'com.quinny898.library.persistentsearch:library:1.0.0-SNAPSHOT'
     compile 'com.anton46:collection-picker:1.0.0'
-
-
 }

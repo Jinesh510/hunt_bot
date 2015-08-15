@@ -53,7 +53,7 @@ public class ProductAdapter extends ParseQueryAdapter<Product_1> {
         viewHolder.productPrice.setText(object.getPrice());
 
         Picasso.with(getContext()).load(object.getProductImage().getUrl()).into(viewHolder.productImage);
-        Picasso.with(getContext()).setIndicatorsEnabled(true);
+//        Picasso.with(getContext()).setIndicatorsEnabled(true);
 
         return v;
 

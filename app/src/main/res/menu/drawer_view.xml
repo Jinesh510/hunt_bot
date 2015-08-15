@@ -10,12 +10,12 @@
             android:icon="@drawable/ic_user"
             android:title="Profile" />
         <item
-            android:id="@+id/nav_second_fragment"
+            android:id="@+id/nav_wish_list"
             android:icon="@drawable/ic_two"
-            android:title="Second" />
+            android:title="My List " />
         <item
-            android:id="@+id/nav_third_fragment"
+            android:id="@+id/nav_fav_brands"
             android:icon="@drawable/ic_three"
-            android:title="Third" />
+            android:title="My Brands" />
     </group>
 </menu>

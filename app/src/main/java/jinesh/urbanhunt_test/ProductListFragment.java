@@ -1,15 +1,16 @@
 package jinesh.urbanhunt_test;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
@@ -25,7 +26,6 @@ import java.util.List;
 public class ProductListFragment extends Fragment {
 
     private CoordinatorLayout productListLayout;
-    private SwipeRefreshLayout swipeContainer;
     private ParseQueryAdapter.QueryFactory<Product_1> pqf;
     private ProductAdapter productAdapter;
     private GridView gvProducts;
@@ -35,6 +35,7 @@ public class ProductListFragment extends Fragment {
     String collectionName;
     boolean i;
     FrameLayout shadowView;
+    Product_1 product;
 
     public static ProductListFragment newInstance( String collectionName, String category, boolean i) {
         ProductListFragment fragment = new ProductListFragment();
@@ -82,8 +83,8 @@ public class ProductListFragment extends Fragment {
 //        swipeContainer = (SwipeRefreshLayout) productListLayout.findViewById(R.id.swipeContainer);
 
         gvProducts = (GridView)productListLayout.findViewById(R.id.gvProducts);
-        shadowView = (FrameLayout)productListLayout.findViewById(R.id.shadowView);
-        relativeLayout = (RelativeLayout)productListLayout.findViewById(R.id.relativeLayout);
+//        shadowView = (FrameLayout)productListLayout.findViewById(R.id.shadowView);
+//        relativeLayout = (RelativeLayout)productListLayout.findViewById(R.id.relativeLayout);
 
         category = getArguments().getString("category");
         subCategory = getArguments().getString("subCategory");
@@ -121,6 +122,20 @@ public class ProductListFragment extends Fragment {
                 p.hide();
 
 
+            }
+        });
+
+        gvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                product = (Product_1)adapterView.getItemAtPosition(i);
+                String productId = product.getObjectId();
+                Activity activity = getActivity();
+                if(activity instanceof FilterCategoriesActivity){
+                    FilterCategoriesActivity filterCategoriesActivity = (FilterCategoriesActivity)activity;
+                    filterCategoriesActivity.openDetailView(productId);
+                }
             }
         });
 

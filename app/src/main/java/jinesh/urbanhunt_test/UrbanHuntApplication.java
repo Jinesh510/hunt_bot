@@ -12,6 +12,8 @@ import com.parse.ParsePush;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import io.branch.referral.Branch;
+
 /**
  * Created by Jinesh on 03/07/15.
  */
@@ -21,6 +23,8 @@ public class UrbanHuntApplication extends Application {
     public void onCreate(){
 
         super.onCreate();
+
+        Branch.getAutoInstance(this);
 
         ParseObject.registerSubclass(Hunt.class);
 

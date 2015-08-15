@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DetailViewInterface{
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
@@ -126,11 +126,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_user:
                 fragment = (Fragment)CUProfilePage.newInstance();
                 break;
-            case R.id.nav_second_fragment:
-                fragment = (Fragment)SecondFragment.newInstance();
+            case R.id.nav_wish_list:
+                fragment = (Fragment)WishListFragment.newInstance();
                 break;
-            case R.id.nav_third_fragment:
-                fragment = (Fragment)ThirdFragment.newInstance();
+            case R.id.nav_fav_brands:
+                fragment = (Fragment) FavBrands.newInstance();
                 break;
             default:
                 fragment = (Fragment) HomeFragment.newInstance();
@@ -150,5 +150,13 @@ public class MainActivity extends AppCompatActivity {
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
         mDrawer.closeDrawers();
+    }
+
+    @Override
+    public void openDetailView(String id) {
+
+        Fragment productDetail = ProductDetail.newInstance(id);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, productDetail).commit();
     }
 }

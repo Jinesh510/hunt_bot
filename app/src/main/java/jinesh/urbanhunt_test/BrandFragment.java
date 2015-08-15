@@ -131,9 +131,11 @@ public class BrandFragment extends Fragment {
                 brand = (Brand) adapterView.getItemAtPosition(i);
                 String brandName = brand.getName();
                 String brandLogoUrl = brand.getLogo().getUrl();
-                Intent intent = new Intent(getActivity(), BrandProfilePage.class);
+                String brandId = brand.getObjectId();
+                Intent intent = new Intent(getActivity(), BrandActivity.class);
                 intent.putExtra("brandName",brandName);
                 intent.putExtra("brandLogoUrl",brandLogoUrl);
+                intent.putExtra("brandId",brandId);
                 getActivity().startActivity(intent);
 
 

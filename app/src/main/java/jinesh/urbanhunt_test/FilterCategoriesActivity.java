@@ -1,10 +1,8 @@
 package jinesh.urbanhunt_test;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,15 +10,10 @@ import android.view.View;
 /**
  * Created by Jinesh on 21/07/15.
  */
-public class FilterCategoriesActivity extends AppCompatActivity {
+public class FilterCategoriesActivity extends AppCompatActivity implements DetailViewInterface{
 
     Toolbar toolbar;
-    Fragment huntListFragment;
-//    int id;
     String id;
-    CategoryPagerAdapter categoryPagerAdapter;
-    ViewPager viewPager;
-    private TabLayout tabLayout;
     boolean flag;
 
     @Override
@@ -71,6 +64,15 @@ public class FilterCategoriesActivity extends AppCompatActivity {
         Fragment filter_products = Filter_Products.newInstance();
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, filter_products).commit();
+
+    }
+
+    @Override
+    public void openDetailView(String id) {
+
+        Fragment productDetail = ProductDetail.newInstance(id);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, productDetail).commit();
 
     }
 
