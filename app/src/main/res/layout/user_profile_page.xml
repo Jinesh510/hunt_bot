@@ -1,20 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+
+    <!--<org.lucasr.twowayview.TwoWayView-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/hlvHunts"-->
+        <!--style="@style/TwoWayView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:drawSelectorOnTop="false"-->
+        <!--tools:context=".uProfilePage"/>-->
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/usrName"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:layout_marginTop="40dp"/>
 
-    <ImageView
+    <jinesh.urbanhunt_test.HorizontalListView
+        android:id="@+id/hlvHunts"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:maxHeight = "200dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/usrName">
+    </jinesh.urbanhunt_test.HorizontalListView>
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/follow"
+        android:layout_below="@+id/hlvHunts"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:text="Follow"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/unfollow"
+        android:layout_below="@+id/hlvHunts"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:text="Unfollow"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/profImage"
-        android:maxHeight="40dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_centerHorizontal="true"/>
-</LinearLayout>
+        android:id="@+id/Following"
+        android:layout_below="@+id/follow"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="20sp"
+        android:text="Following"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/followingCount"
+        android:layout_below="@+id/Following"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Followers"
+        android:layout_below="@+id/unfollow"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:textSize="20sp"
+        android:text="Followers"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/followerCount"
+        android:layout_below="@+id/Followers"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:textSize="20sp"/>
+
+
+</RelativeLayout>
