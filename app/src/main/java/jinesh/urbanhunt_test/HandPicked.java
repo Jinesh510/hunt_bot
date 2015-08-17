@@ -26,8 +26,8 @@ public class HandPicked extends Activity {
 
         SimpleCardStackAdapter adapter = new SimpleCardStackAdapter(this);
         adapter.add(new CardModel("Accesories", "Description goes here", getResources().getDrawable(R.drawable.accesories_cat,null)));
-        adapter.add(new CardModel("Apparels", "Description goes here", getResources().getDrawable(R.drawable.apparels_cat,null)));
-        adapter.add(new CardModel("Title1", "Description goes here", getResources().getDrawable(R.drawable.bags_cat,null)));
+        adapter.add(new CardModel("Apparels", "Description goes here", getResources().getDrawable(R.drawable.apparels_cat, null)));
+        adapter.add(new CardModel("Title1", "Description goes here", getResources().getDrawable(R.drawable.bags_cat, null)));
 
         CardModel cardModel = new CardModel("Title1", "Description goes here", getResources().getDrawable(R.drawable.beauty_cat, null));
         cardModel.setOnClickListener(new CardModel.OnClickListener() {
@@ -37,6 +37,8 @@ public class HandPicked extends Activity {
 //                Log.d("tImg",cardModel.getTitle());
             }
         });
+
+//        ParseQuery<CardModel> parseQuery = ParseQuery.getQuery(CardModel.class);
 
         cardModel.setOnCardDimissedListener(new CardModel.OnCardDimissedListener() {
             @Override

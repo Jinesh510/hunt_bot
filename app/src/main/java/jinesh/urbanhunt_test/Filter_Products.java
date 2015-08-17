@@ -30,10 +30,10 @@ public class Filter_Products extends Fragment implements DataTransferInterface {
     boolean [] Price;
     boolean [] Size;
     boolean [] Color;
-    List<String> brandList;
-    List<String> priceList;
-    List<String> sizeList;
-    List<String> colorList;
+    ArrayList<String> brandList;
+    ArrayList<String> priceList;
+    ArrayList<String> sizeList;
+    ArrayList<String> colorList;
 
 
 
@@ -95,7 +95,15 @@ public class Filter_Products extends Fragment implements DataTransferInterface {
         Arrays.fill(Color,false);
 
 
-        Log.d("listSize",""+filterExpandableListAdapter.selectedItemsBrand.size());
+        Log.d("listSize", "" + filterExpandableListAdapter.selectedItemsBrand.size());
+
+        btnApplyFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((FilterCategoriesActivity)getActivity()).openFilteredList(brandList,priceList,sizeList,colorList);
+
+            }
+        });
 
         return filterListLayout;
 
@@ -203,7 +211,7 @@ public class Filter_Products extends Fragment implements DataTransferInterface {
 //    }
 
     @Override
-    public void setValues(int group, List<String> items) {
+    public void setValues(int group, ArrayList<String> items) {
 
         switch (group) {
             case 0:

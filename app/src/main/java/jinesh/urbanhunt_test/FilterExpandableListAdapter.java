@@ -26,10 +26,10 @@ public class FilterExpandableListAdapter extends BaseExpandableListAdapter {
     boolean [] checkboxState;
     Filter_Products filter_products;
     HashMap<String,List<String>> selectedItemsMap = null;
-    List<String> selectedItemsBrand = new ArrayList<String>();
-    List<String> selectedItemsPrice = new ArrayList<String>();
-    List<String> selectedItemsSize = new ArrayList<String>();
-    List<String> selectedItemsColor = new ArrayList<String>();
+    ArrayList<String> selectedItemsBrand = new ArrayList<String>();
+    ArrayList<String> selectedItemsPrice = new ArrayList<String>();
+    ArrayList<String> selectedItemsSize = new ArrayList<String>();
+    ArrayList<String> selectedItemsColor = new ArrayList<String>();
     DataTransferInterface dtInterface;
 
 
@@ -113,7 +113,10 @@ public class FilterExpandableListAdapter extends BaseExpandableListAdapter {
         checkboxState = new boolean[getChildrenCount(groupPosition)];
         Arrays.fill(checkboxState, false);
 
-
+        FilterCategoriesActivity f = new FilterCategoriesActivity();
+        if(f.brandArray !=null) {
+            Log.d("bArray", "" + f.brandArray.size());
+        }
 
         checkListChild.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,12 +136,17 @@ public class FilterExpandableListAdapter extends BaseExpandableListAdapter {
                             break;
                         case 1:
                             selectedItemsPrice.add(childText);
+                            dtInterface.setValues(groupPosition, selectedItemsPrice);
+
                             break;
                         case 2:
                             selectedItemsSize.add(childText);
+                            dtInterface.setValues(groupPosition, selectedItemsSize);
+
                             break;
                         case 3:
                             selectedItemsColor.add(childText);
+                            dtInterface.setValues(groupPosition, selectedItemsColor);
                             break;
 
                     }
@@ -156,15 +164,22 @@ public class FilterExpandableListAdapter extends BaseExpandableListAdapter {
                         case 0:
                             selectedItemsBrand.remove(childText);
                             Log.d("Removed", "" + selectedItemsBrand.size());
+                            dtInterface.setValues(groupPosition, selectedItemsBrand);
                             break;
                         case 1:
                             selectedItemsPrice.remove(childText);
+                            dtInterface.setValues(groupPosition, selectedItemsPrice);
+
                             break;
                         case 2:
                             selectedItemsSize.remove(childText);
+                            dtInterface.setValues(groupPosition, selectedItemsSize);
+
                             break;
                         case 3:
                             selectedItemsColor.remove(childText);
+                            dtInterface.setValues(groupPosition, selectedItemsColor);
+
                             break;
                     }
 

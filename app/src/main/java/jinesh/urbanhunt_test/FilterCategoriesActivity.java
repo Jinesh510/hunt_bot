@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jinesh on 21/07/15.
  */
@@ -15,6 +17,14 @@ public class FilterCategoriesActivity extends AppCompatActivity implements Detai
     Toolbar toolbar;
     String id;
     boolean flag;
+    String collectionName;
+    String categoryName;
+    int categoryId;
+    ArrayList<String> brandArray;
+    ArrayList<String> priceArray;
+    ArrayList<String> sizeArray;
+    ArrayList<String> colorArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +36,10 @@ public class FilterCategoriesActivity extends AppCompatActivity implements Detai
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String collectionName = getIntent().getStringExtra("collectionName");
+        collectionName = getIntent().getStringExtra("collectionName");
 
-        int categoryId = getIntent().getIntExtra("category", 0);
-        String categoryName = getIntent().getStringExtra("categoryName");
+        categoryId = getIntent().getIntExtra("category", 0);
+        categoryName = getIntent().getStringExtra("categoryName");
 //        toolbar.setTitle(strCategoryName);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -73,6 +83,18 @@ public class FilterCategoriesActivity extends AppCompatActivity implements Detai
         Fragment productDetail = ProductDetail.newInstance(id);
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, productDetail).commit();
+
+    }
+
+    public void openFilteredList(ArrayList<String> brandList,ArrayList<String> priceList,ArrayList<String> sizeList,ArrayList<String> colorList){
+
+        brandArray =brandList;
+        priceArray = priceList;
+        sizeArray = sizeList;
+        colorArray = colorList;
+        Fragment filterCategoriesFragment = FilterCategoriesFragment.newInstance(collectionName, categoryName, categoryId,brandList,priceList,sizeList,colorList);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, filterCategoriesFragment).commit();
 
     }
 

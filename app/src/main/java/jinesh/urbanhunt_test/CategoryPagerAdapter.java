@@ -22,8 +22,25 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter {
     ArrayList<String> subCategories;
     String categoryName;
     String collectionName;
+    ArrayList<String> brandList;
+    ArrayList<String> priceList;
+    ArrayList<String> sizeList;
+    ArrayList<String> colorList;
 
 
+
+
+    public CategoryPagerAdapter(FragmentManager fm, Context context, String collectionName, ArrayList<String> brandList,ArrayList<String> priceList,ArrayList<String> sizeList,ArrayList<String> colorList) {
+        super(fm);
+        this.context = context;
+        this.collectionName = collectionName;
+        this.subCategories = getCategories();
+        this.PAGE_COUNT = subCategories.size();
+        this.brandList = brandList;
+        this.priceList = priceList;
+        this.sizeList = sizeList;
+        this.colorList = colorList;
+    }
 
     public CategoryPagerAdapter(FragmentManager fm, Context context, String collectionName) {
         super(fm);
@@ -31,6 +48,32 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter {
         this.collectionName = collectionName;
         this.subCategories = getCategories();
         this.PAGE_COUNT = subCategories.size();
+    }
+
+
+
+    public CategoryPagerAdapter(FragmentManager fm, Context context, String collectionName,int categoryId,String categoryName,ArrayList<String> brandList,ArrayList<String> priceList,ArrayList<String> sizeList,ArrayList<String> colorList ) {
+        super(fm);
+        this.context = context;
+        this.collectionName = collectionName;
+        this.subCategories = getCategories();
+        this.PAGE_COUNT = subCategories.size();
+    }
+
+
+
+    public CategoryPagerAdapter(FragmentManager fm, Context context, int categoryId, String categoryName, ArrayList<String> brandList,ArrayList<String> priceList,ArrayList<String> sizeList,ArrayList<String> colorList) {
+        super(fm);
+        this.context = context;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.subCategories = getSubCategories(categoryId);
+        this.PAGE_COUNT = subCategories.size();
+        this.brandList = brandList;
+        this.priceList = priceList;
+        this.sizeList = sizeList;
+        this.colorList = colorList;
+
     }
 
     public CategoryPagerAdapter(FragmentManager fm, Context context, int categoryId, String categoryName) {
@@ -93,10 +136,10 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter {
 //            return productListFragment.newInstance(categoryName,subcategory);
         if(categoryName == null){
             Log.d("categoryName",subcategory);
-            return productListFragment.newInstance(collectionName,subcategory,true);
+            return productListFragment.newInstance(collectionName,subcategory,true,brandList,priceList,sizeList,colorList);
         }else{
             Log.d("subCat",subcategory);
-            return productListFragment.newInstance(categoryName,subcategory);}
+            return productListFragment.newInstance(categoryName,subcategory,brandList,priceList,sizeList,colorList);}
 
 //            Fragment fragment = null;
 //

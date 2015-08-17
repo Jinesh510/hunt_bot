@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,20 +39,41 @@ public class ProductListFragment extends Fragment {
     FrameLayout shadowView;
     Product_1 product;
 
-    public static ProductListFragment newInstance( String collectionName, String category, boolean i) {
+    ArrayList<String> brandList;
+    ArrayList<String> priceList;
+    ArrayList<String> sizeList;
+    ArrayList<String> colorList;
+
+    String[] brandArray;
+    String[] priceArray;
+    String[] sizeArray;
+    String[] colorArray;
+
+
+    public static ProductListFragment newInstance( String collectionName, String category, boolean i, ArrayList<String> brandList,ArrayList<String> priceList,ArrayList<String> sizeList,ArrayList<String> colorList) {
         ProductListFragment fragment = new ProductListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("category", category);
         bundle.putString("collectionName", collectionName);
         bundle.putBoolean("flag", i);
+        bundle.putStringArrayList("brandList", brandList);
+        bundle.putStringArrayList("priceList", priceList);
+        bundle.putStringArrayList("sizeList", sizeList);
+        bundle.putStringArrayList("colorList", colorList);
         fragment.setArguments(bundle);
         return fragment;
+
     }
-    public static ProductListFragment newInstance( String category, String subCategory) {
+    public static ProductListFragment newInstance( String category, String subCategory,ArrayList<String> brandList,ArrayList<String> priceList,ArrayList<String> sizeList,ArrayList<String> colorList) {
         ProductListFragment fragment = new ProductListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("category", category);
         bundle.putString("subCategory", subCategory);
+        bundle.putStringArrayList("brandList", brandList);
+        bundle.putStringArrayList("priceList",priceList);
+        bundle.putStringArrayList("sizeList", sizeList);
+        bundle.putStringArrayList("colorList", colorList);
+
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -91,15 +114,35 @@ public class ProductListFragment extends Fragment {
         collectionName = getArguments().getString("collectionName");
         i = getArguments().getBoolean("flag");
 
+        brandList = getArguments().getStringArrayList("brandList");
+        priceList = getArguments().getStringArrayList("priceList");
+        sizeList = getArguments().getStringArrayList("sizeList");
+        colorList = getArguments().getStringArrayList("colorList");
+
+        if(brandList !=null){
+        brandArray = brandList.toArray(new String[brandList.size()]);
+        }
+        if(priceList !=null){
+            priceArray = priceList.toArray(new String[priceList.size()]);
+
+        }
+        if(sizeList !=null){
+            sizeArray = sizeList.toArray(new String[sizeList.size()]);
+        }
+
+        if(colorList !=null){
+            colorArray = brandList.toArray(new String[colorList.size()]);
+        }
+
 
 
 
         if(collectionName == null && category == null && subCategory == null){
             fetchProducts();
         }else if(collectionName != null ){
-            fetchProducts(collectionName,category,i);
+            fetchProducts(collectionName,category,i,brandArray,priceArray,sizeArray,colorArray);
         }else if(subCategory != null){
-            fetchProducts(category,subCategory);
+            fetchProducts(category,subCategory,brandArray,priceArray,sizeArray,colorArray);
         }
 
         productAdapter = new ProductAdapter(getActivity(),pqf);
@@ -144,7 +187,7 @@ public class ProductListFragment extends Fragment {
 
 
 
-    private void fetchProducts(final String collectionName,final String category, boolean i) {
+    private void fetchProducts(final String collectionName,final String category, boolean i, final String[] brandList, final String[] priceList, final String[] sizeList, final String[] colorList) {
 
         pqf = new ParseQueryAdapter.QueryFactory<Product_1>() {
             @Override
@@ -156,12 +199,26 @@ public class ProductListFragment extends Fragment {
                     productParseQuery.whereEqualTo("collection", collectionName);
                     productParseQuery.whereEqualTo("category", category);
                 }
+
+                if(brandList !=null){
+                    productParseQuery.whereContainedIn("brandName", Arrays.asList(brandList));
+                }
+                if(priceList !=null){
+                    productParseQuery.whereContainedIn("priceRange", Arrays.asList(priceList));
+                }
+                if(sizeList !=null){
+                    productParseQuery.whereContainedIn("size",Arrays.asList(sizeList));
+                }
+                if(colorList !=null){
+                    productParseQuery.whereContainedIn("color", Arrays.asList(colorList));
+                }
+
                 return productParseQuery;
             }
         };
     }
 
-    private void fetchProducts(final String category, final String subCategory) {
+    private void fetchProducts(final String category, final String subCategory, final String[] brandList, final String[] priceList, final String[] sizeList, final String[] colorList) {
 
         pqf = new ParseQueryAdapter.QueryFactory<Product_1>() {
             @Override
@@ -172,6 +229,19 @@ public class ProductListFragment extends Fragment {
                 }else{
                     productParseQuery.whereEqualTo("category",category);
                     productParseQuery.whereEqualTo("subCategory",subCategory);
+                }
+
+                if(brandList !=null){
+                    productParseQuery.whereContainedIn("brandName", Arrays.asList(brandList));
+                }
+                if(priceList !=null){
+                    productParseQuery.whereContainedIn("priceRange", Arrays.asList(priceList));
+                }
+                if(sizeList !=null){
+                    productParseQuery.whereContainedIn("size",Arrays.asList(sizeList));
+                }
+                if(colorList !=null){
+                    productParseQuery.whereContainedIn("color",Arrays.asList(colorList));
                 }
 
                 return productParseQuery;
