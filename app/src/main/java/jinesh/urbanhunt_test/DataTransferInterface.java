@@ -11,4 +11,5 @@ public interface DataTransferInterface {
 
     public void setValues(int group,ArrayList<String> items);
 
+    public void setBoolean(int group, ArrayList<Boolean> items);
 }

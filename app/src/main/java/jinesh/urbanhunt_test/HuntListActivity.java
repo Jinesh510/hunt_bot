@@ -172,6 +172,10 @@ public class HuntListActivity extends Fragment {
         });
         gvHunts.setAdapter(customParseQueryAdapter);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            gvHunts.setNestedScrollingEnabled(true);
+        }
+
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

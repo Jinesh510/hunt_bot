@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.Tracker;
 import com.quinny898.library.persistentsearch.SearchBox;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class SelectCategoryFragment extends Fragment {
     private SearchBox search;
     private Category category;
     private Collection collection;
+    private Tracker mTracker;
+
 
     public static SelectCategoryFragment newInstance() {
         SelectCategoryFragment fragment = new SelectCategoryFragment();
@@ -99,6 +102,9 @@ public class SelectCategoryFragment extends Fragment {
 
         collectionList.setAdapter(collectionsAdapter);
 
+//        UrbanHuntApplication application = (UrbanHuntApplication)getActivity().getApplication();
+//        mTracker = application.getDefaultTracker();
+
 
 
         categoryGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -111,6 +117,13 @@ public class SelectCategoryFragment extends Fragment {
 //                TextView categoryName = (TextView) view.findViewById(R.id.categoryName);
 //                String strCategoryName = categoryName.getText().toString();
 //                int categoryId = category.getId(strCategoryName);
+
+                // Build and send an Event.
+//                mTracker.send(new HitBuilders.EventBuilder()
+//                        .setCategory("Action")
+//                        .setAction("Share")
+//                        .build());
+
                 Intent intent = new Intent(getActivity(), FilterCategoriesActivity.class);
                 intent.putExtra("category", categoryId);
                 intent.putExtra("categoryName", categoryName);

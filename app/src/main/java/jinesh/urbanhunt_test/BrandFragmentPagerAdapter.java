@@ -11,40 +11,21 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 public class BrandFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "Feed", "Categories", "Stores" };
+    private String tabTitles[] = new String[] { "popular", "newArrival", "discount" };
     private Context context;
+    String brandId;
 
-    public BrandFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public BrandFragmentPagerAdapter(FragmentManager fm, Context context, String brand) {
         super(fm);
         this.context = context;
+        this.brandId = brand;
     }
 
 
     @Override
     public Fragment getItem(int position) {
-
-        Fragment fragment = null;
-
-        Class fragmentClass;
-        switch(position) {
-            case 0:
-                fragment = HuntListActivity.newInstance("All");
-                return fragment;
-            case 1:
-                fragment = SelectCategoryFragment.newInstance();
-                return fragment;
-            case 2:
-                try {
-                    fragment = FirstFragment.class.newInstance();
-                    return fragment;
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-        }
-
-        return null;
+        ProductListFragment productListFragment = null;
+        return productListFragment.newInstance(brandId,tabTitles[position]);
     }
 
     @Override

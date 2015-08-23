@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 public class HomeFragment extends Fragment {
 
     LinearLayout homeLayout;
+//    CoordinatorLayout homeLayout;
+
     HomeFragmentPagerAdapter homeFragmentPagerAdapter;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         homeLayout = (LinearLayout)inflater.inflate(R.layout.home,container,false);
+//        homeLayout = ()inflater.inflate(R.layout.home,container,false);
 
         homeFragmentPagerAdapter = new HomeFragmentPagerAdapter(getActivity().getSupportFragmentManager(),this.getActivity());
         viewPager = (ViewPager)homeLayout.findViewById(R.id.viewpager);
@@ -45,6 +48,10 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(homeFragmentPagerAdapter);
         tabLayout = (TabLayout)homeLayout.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            viewPager.setNestedScrollingEnabled(true);
+//        }
 
         return homeLayout;
     }

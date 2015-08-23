@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="75dp"
         android:orientation="horizontal"
         android:id="@+id/brandData">
 
@@ -16,41 +18,77 @@
             android:id="@+id/brandLogo"
             android:scaleType="centerInside"
             android:adjustViewBounds="true"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:id="@+id/brandName"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewStores"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="View Stores"/>
+        </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/favBrand"
             android:layout_weight="1"
+            android:maxHeight="30dp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
             android:layout_gravity="center"
-            android:src="@drawable/fav"/>
+            android:src="@drawable/fav_unfill"/>
     </LinearLayout>
 
-    <ListView
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/storeList"-->
+        <!--android:layout_below="@+id/brandData"></ListView>-->
+
+    <!--<jinesh.urbanhunt_test.HorizontalListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="160dp"-->
+        <!--android:id="@+id/brandPop"-->
+        <!--android:layout_below="@+id/storeList">-->
+    <!--</jinesh.urbanhunt_test.HorizontalListView>-->
+
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/btnBrandCollection"-->
+        <!--android:text="View All Products"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_below="@+id/brandPop"/>-->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/storeList"
-        android:layout_below="@+id/brandData"></ListView>
+        android:layout_below="@+id/brandData"
+        app:tabMode="fixed"
+        app:tabGravity="fill"/>
 
-    <jinesh.urbanhunt_test.HorizontalListView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:id="@+id/brandPop"
-        android:layout_below="@+id/storeList">
-    </jinesh.urbanhunt_test.HorizontalListView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sliding_tabs"
+        android:background="@android:color/white" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnBrandCollection"
-        android:text="View All Products"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/brandPop"/>
-</LinearLayout>
+</RelativeLayout>

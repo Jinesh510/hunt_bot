@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
+import ru.noties.scrollable.ScrollableLayout;
+
 /**
  * Created by Jinesh on 12/08/15.
  */
@@ -20,6 +22,8 @@ public class FilterCategoriesFragment extends Fragment {
 
 
     LinearLayout categoryListLayout;
+//    View categoryListLayout;
+    ScrollableLayout scrollableLayout;
     CategoryPagerAdapter categoryPagerAdapter;
     ViewPager viewPager;
     private TabLayout tabLayout;
@@ -73,7 +77,11 @@ public class FilterCategoriesFragment extends Fragment {
 
 
         categoryListLayout = (LinearLayout)inflater.inflate(R.layout.filter_categories_frag,container,false);
+//        categoryListLayout = inflater.inflate(R.layout.filter_categories_frag,container,false);
 
+
+//        scrollableLayout = (ScrollableLayout)categoryListLayout.findViewById(R.id.scrollable_layout);
+//        categoryListLayout = (ScrollableLayout)inflater.inflate(R.layout.filter_categories_frag,container,false);
         if (collectionName !=null) {
             if (brandList != null || priceList != null || sizeList != null || colorList != null) {
                 categoryPagerAdapter = new CategoryPagerAdapter(getActivity().getSupportFragmentManager(), getActivity(), collectionName, brandList, priceList, sizeList, colorList);
@@ -95,13 +103,16 @@ public class FilterCategoriesFragment extends Fragment {
 
             }
         }
+//        final ImageView v = (ImageView)categoryListLayout.findViewById(R.id.headerImage);
         viewPager = (ViewPager)categoryListLayout.findViewById(R.id.viewpager);
 //        viewPager.setAdapter(new HomeFragmentPagerAdapter(getActivity().getSupportFragmentManager(), getActivity()));
 
         viewPager.setAdapter(categoryPagerAdapter);
+
+
         tabLayout = (TabLayout)categoryListLayout.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-
+//        scrollableLayout.setDraggableView(tabLayout);
         filter = (Button)categoryListLayout.findViewById(R.id.filter);
 
 
@@ -113,6 +124,31 @@ public class FilterCategoriesFragment extends Fragment {
         });
 
 
+//        scrollableLayout.setCanScrollVerticallyDelegate(new CanScrollVerticallyDelegate() {
+//            @Override
+//            public boolean canScrollVertically(int direction) {
+//                return categoryPagerAdapter.canScrollVertically(viewPager.getCurrentItem(), direction);
+//            }
+//        });
+//
+//
+//        scrollableLayout.setOnScrollChangedListener(new OnScrollChangedListener() {
+//            @Override
+//            public void onScrollChanged(int y, int oldY, int maxY) {
+//
+//                // Sticky behavior
+//                final float tabsTranslationY;
+//                if (y < maxY) {
+//                    tabsTranslationY = .0F;
+//                } else {
+//                    tabsTranslationY = y - maxY;
+//                }
+//
+//                tabLayout.setTranslationY(tabsTranslationY);
+//
+//                v.setTranslationY(y / 2);
+//            }
+//        });
 
         return categoryListLayout;
     }

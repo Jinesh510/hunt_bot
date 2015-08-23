@@ -1,6 +1,7 @@
 package jinesh.urbanhunt_test;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
+import android.widget.FrameLayout;
 
 
 public class MainActivity extends AppCompatActivity implements DetailViewInterface{
@@ -20,6 +21,11 @@ public class MainActivity extends AppCompatActivity implements DetailViewInterfa
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    FrameLayout fl;
+//    private Tracker mTracker;
+    String name;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +35,17 @@ public class MainActivity extends AppCompatActivity implements DetailViewInterfa
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        name = "Screen1";
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
 
         mDrawer.setDrawerListener(drawerToggle);
+
+        fl = (FrameLayout)findViewById(R.id.flContent);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            fl.setNestedScrollingEnabled(true);
+        }
 
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -46,6 +59,18 @@ public class MainActivity extends AppCompatActivity implements DetailViewInterfa
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, homeFragment).commit();
 
+//        UrbanHuntApplication application = (UrbanHuntApplication) getApplication();
+//        mTracker = application.getDefaultTracker();
+
+    }
+
+    @Override
+    protected void onResume() {
+
+//        Log.i("MainActivity", "Setting screen name: " + name);
+//        mTracker.setScreenName("Image~" + name);
+//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        super.onResume();
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
@@ -124,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements DetailViewInterfa
                 fragment = (Fragment) HomeFragment.newInstance();
                 break;
             case R.id.nav_user:
-                fragment = (Fragment)CUProfilePage.newInstance();
+                fragment = (Fragment)ProfileFragment.newInstance();
                 break;
             case R.id.nav_wish_list:
                 fragment = (Fragment)WishListFragment.newInstance();

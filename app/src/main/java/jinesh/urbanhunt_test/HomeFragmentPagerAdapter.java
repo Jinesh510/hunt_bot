@@ -28,7 +28,7 @@ public class HomeFragmentPagerAdapter extends FragmentStatePagerAdapter {
         Class fragmentClass;
         switch(position) {
             case 0:
-                fragment = HuntListActivity.newInstance("All");
+                fragment = ProductListFragment.newInstance();
                 return fragment;
             case 1:
                 fragment = SelectCategoryFragment.newInstance();

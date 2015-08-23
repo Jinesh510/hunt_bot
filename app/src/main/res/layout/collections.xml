@@ -5,10 +5,10 @@
 
     <jinesh.urbanhunt_test.HorizontalListView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="80dp"
         android:id="@+id/categoryList"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp">
     </jinesh.urbanhunt_test.HorizontalListView>
 
@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:text="Cool Collections"
         android:textSize="20sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:textColor="#e74c3c"/>
 

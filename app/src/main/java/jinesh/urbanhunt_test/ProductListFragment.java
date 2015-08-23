@@ -2,6 +2,7 @@ package jinesh.urbanhunt_test;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -25,12 +26,13 @@ import java.util.List;
 /**
  * Created by Jinesh on 10/08/15.
  */
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends Fragment{
 
     private CoordinatorLayout productListLayout;
     private ParseQueryAdapter.QueryFactory<Product_1> pqf;
     private ProductAdapter productAdapter;
     private GridView gvProducts;
+//    RecyclerView gvProducts;
     RelativeLayout relativeLayout;
     String category;
     String subCategory;
@@ -38,6 +40,8 @@ public class ProductListFragment extends Fragment {
     boolean i;
     FrameLayout shadowView;
     Product_1 product;
+    String brandId;
+    String productType;
 
     ArrayList<String> brandList;
     ArrayList<String> priceList;
@@ -86,6 +90,16 @@ public class ProductListFragment extends Fragment {
         return fragment;
     }
 
+    public static ProductListFragment newInstance( String brandId, String productType) {
+        ProductListFragment fragment = new ProductListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("brandId", brandId);
+        bundle.putString("productType", productType);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+
     public static ProductListFragment newInstance() {
         ProductListFragment fragment = new ProductListFragment();
         Bundle bundle = new Bundle();
@@ -106,12 +120,20 @@ public class ProductListFragment extends Fragment {
 //        swipeContainer = (SwipeRefreshLayout) productListLayout.findViewById(R.id.swipeContainer);
 
         gvProducts = (GridView)productListLayout.findViewById(R.id.gvProducts);
+
+//        gvProducts = (RecyclerView)productListLayout.findViewById(R.id.gvProducts);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+//        gvProducts.setLayoutManager(gridLayoutManager);
+//        gvProducts.setItemAnimator(new DefaultItemAnimator());
 //        shadowView = (FrameLayout)productListLayout.findViewById(R.id.shadowView);
 //        relativeLayout = (RelativeLayout)productListLayout.findViewById(R.id.relativeLayout);
 
         category = getArguments().getString("category");
         subCategory = getArguments().getString("subCategory");
         collectionName = getArguments().getString("collectionName");
+
+        brandId = getArguments().getString("brandId");
+        productType = getArguments().getString("productType");
         i = getArguments().getBoolean("flag");
 
         brandList = getArguments().getStringArrayList("brandList");
@@ -120,7 +142,7 @@ public class ProductListFragment extends Fragment {
         colorList = getArguments().getStringArrayList("colorList");
 
         if(brandList !=null){
-        brandArray = brandList.toArray(new String[brandList.size()]);
+            brandArray = brandList.toArray(new String[brandList.size()]);
         }
         if(priceList !=null){
             priceArray = priceList.toArray(new String[priceList.size()]);
@@ -137,7 +159,10 @@ public class ProductListFragment extends Fragment {
 
 
 
-        if(collectionName == null && category == null && subCategory == null){
+
+        if(brandId !=null){
+            fetchProducts(brandId,productType);
+        }else if(collectionName == null && category == null && subCategory == null){
             fetchProducts();
         }else if(collectionName != null ){
             fetchProducts(collectionName,category,i,brandArray,priceArray,sizeArray,colorArray);
@@ -147,21 +172,28 @@ public class ProductListFragment extends Fragment {
 
         productAdapter = new ProductAdapter(getActivity(),pqf);
         productAdapter.setObjectsPerPage(8);
-        Log.d("list","true");
+        Log.d("list", "true");
         productAdapter.setPaginationEnabled(true);
         gvProducts.setAdapter(productAdapter);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            gvProducts.setNestedScrollingEnabled(true);
+        }
+
+//        final CircularProgressView progressView = (CircularProgressView)productListLayout.findViewById(R.id.progress_view);
 
         final ProgressDialog p = new ProgressDialog(getActivity());
 
         productAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<Product_1>() {
             @Override
             public void onLoading() {
+//                progressView.startAnimation();
                 p.show();
             }
 
             @Override
             public void onLoaded(List<Product_1> list, Exception e) {
-
+;
                 p.hide();
 
 
@@ -181,6 +213,7 @@ public class ProductListFragment extends Fragment {
                 }
             }
         });
+
 
         return productListLayout;
     }
@@ -262,6 +295,20 @@ public class ProductListFragment extends Fragment {
         };
     }
 
+
+    private void fetchProducts(final String brandId, final String productType ) {
+
+        pqf = new ParseQueryAdapter.QueryFactory<Product_1>() {
+            @Override
+            public ParseQuery<Product_1> create() {
+                ParseQuery<Product_1> productParseQuery = ParseQuery.getQuery(Product_1.class);
+                productParseQuery.whereEqualTo("brandName",brandId);
+                productParseQuery.whereEqualTo(productType,true);
+                return productParseQuery;
+            }
+        };
+    }
+
     private void fetchProducts(){
         pqf = new ParseQueryAdapter.QueryFactory<Product_1>() {
             @Override
@@ -272,4 +319,14 @@ public class ProductListFragment extends Fragment {
             }
         };
     }
+
+
+
+//    @Override
+//    public boolean canScrollVertically(int i) {
+//
+////            return gvProducts != null && gvProducts.canScrollVertically(i);
+//        return productListLayout != null && productListLayout.canScrollVertically(i);
+//
+//    }
 }

@@ -183,4 +183,9 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter {
 
         return subCategories.get(position);
     }
+
+//    boolean canScrollVertically(int position, int direction) {
+//        return ((ProductListFragment)getItem(position)).canScrollVertically(direction);
+//    }
+
 }

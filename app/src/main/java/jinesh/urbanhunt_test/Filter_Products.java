@@ -35,6 +35,12 @@ public class Filter_Products extends Fragment implements DataTransferInterface {
     ArrayList<String> sizeList;
     ArrayList<String> colorList;
 
+    ArrayList<Boolean> brandPositionArray;
+    ArrayList<Boolean> pricePositionArray;
+    ArrayList<Boolean> sizePositionArray;
+    ArrayList<Boolean> colorPositionArray;
+
+
 
 
     public Filter_Products() {
@@ -76,7 +82,10 @@ public class Filter_Products extends Fragment implements DataTransferInterface {
         Button btnApplyFilter = (Button)filterListLayout.findViewById(R.id.btnApplyFilter);
         prepareListData();
 
+
 //        expandableListDetail = ExpandableListDataPump.getData();
+
+
         filterExpandableListAdapter = new FilterExpandableListAdapter(getActivity(),listDataHeader,listDataChild,this);
 
         expandableListView.setAdapter(filterExpandableListAdapter);
@@ -100,6 +109,7 @@ public class Filter_Products extends Fragment implements DataTransferInterface {
         btnApplyFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((FilterCategoriesActivity)getActivity()).setBoolean(brandPositionArray,pricePositionArray,sizePositionArray,colorPositionArray);
                 ((FilterCategoriesActivity)getActivity()).openFilteredList(brandList,priceList,sizeList,colorList);
 
             }
@@ -217,23 +227,61 @@ public class Filter_Products extends Fragment implements DataTransferInterface {
             case 0:
                 brandList = items;
 //                brandList.add(item);
-//                Log.d("bsize",""+brandList.size());
+                if(brandList !=null){
+                Log.d("bsize",""+brandList.size());}
+                if(brandList.size() == 0){
+                    brandList = null;
+                }
                 break;
             case 1:
                 priceList = items;
 //                priceList.add(item);
 //                Log.d("bsize",""+priceList.size());
+                if(priceList.size() == 0){
+                    priceList = null;
+                }
                 break;
             case 2:
                 sizeList = items;
 //                sizeList.add(item);
+                if(sizeList.size() == 0){
+                    sizeList = null;
+                }
                 break;
             case 3:
                 colorList = items;
 //                colorList.add(item);
+                if(colorList.size() == 0){
+                    colorList = null;
+                }
                 break;
 
         }
 
     }
+
+    @Override
+    public void setBoolean(int group, ArrayList<Boolean> items) {
+
+        switch (group) {
+            case 0:
+                brandPositionArray = items;
+
+                break;
+            case 1:
+                pricePositionArray = items;
+
+                break;
+            case 2:
+                sizePositionArray = items;
+
+                break;
+            case 3:
+                colorPositionArray = items;
+                break;
+
+        }
+    }
+
+
 }

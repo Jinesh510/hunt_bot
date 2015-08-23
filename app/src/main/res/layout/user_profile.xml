@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/coverImage"
+        android:scaleType="centerCrop"
+        android:background="#a2547983" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/profileImage"
+            android:layout_marginTop="140dp"
+            android:src="@drawable/profile_image"
+            android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/profileImage">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wishListCount"
+                android:layout_centerInParent="true"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/wishListCount"
+                android:layout_centerInParent="true"
+                android:textSize="16sp"
+                android:text="Wish List"/>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="40dp"
+                android:background="#e74c3c"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"></View>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/creditCount"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creditCount"
+                android:layout_centerInParent="true"
+                android:textSize="16sp"
+                android:text="Credits"/>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="40dp"
+                android:background="#e74c3c"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"></View>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/favBrandCount"
+                android:layout_centerInParent="true"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/favBrandCount"
+                android:layout_centerInParent="true"
+                android:textSize="16sp"
+                android:text="Fav. Brands"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>
