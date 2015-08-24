@@ -39,7 +39,8 @@ public class ProductDetail extends Fragment {
     RelativeLayout productDetailLayout;
     ImageView productImage;
 //    Button btnAddWish;
-    Button btnShareImage;
+//    Button btnShareImage;
+    ImageView btnShareImage;
     Button btnReserve;
     String productId;
     String productName;
@@ -80,7 +81,8 @@ public class ProductDetail extends Fragment {
 
 //        btnAddWish = (Button)productDetailLayout.findViewById(R.id.btnAddWish);
 
-        btnShareImage = (Button)productDetailLayout.findViewById(R.id.btnShareImage);
+//        btnShareImage = (Button)productDetailLayout.findViewById(R.id.btnShareImage);
+        btnShareImage = (ImageView)productDetailLayout.findViewById(R.id.share);
         btnReserve = (Button)productDetailLayout.findViewById(R.id.btnReserve);
         addWish = (ImageView)productDetailLayout.findViewById(R.id.addWish);
 

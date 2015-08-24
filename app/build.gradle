@@ -61,5 +61,6 @@ dependencies {
     compile 'com.andreabaccega:googlshortenerlib:1.0.0'
     compile 'com.github.rahatarmanahmed:circularprogressview:2.3.2'
     compile 'com.google.android.gms:play-services-analytics:7.3.0'
+    compile 'com.github.paolorotolo:appintro:3.2.0'
 
 }

@@ -3,51 +3,64 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/productImage"
-        android:maxHeight="200dp"
-        android:scaleType="fitXY"
+        android:maxHeight="350dp"
+        android:scaleType="centerInside"
         android:adjustViewBounds="true"
-        android:layout_centerInParent="true"/>
+        android:layout_marginTop="20dp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:id="@+id/layoutBtn"
         android:layout_below="@+id/productImage"
         android:orientation="horizontal"
         android:layout_marginTop="20dp">
         
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="1">
             
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:src="@drawable/wish_add"
                 android:id = "@+id/addWish"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/addWish"
                 android:text="wishlist"/>
-        </LinearLayout>
-        
-        <Button
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnShareImage"
-            android:layout_weight="1"
-            android:text="Share"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_share"
+                android:id = "@+id/share"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/share"
+                android:text="Share"/>
+        </RelativeLayout>
+
     </LinearLayout>
 
     <Button
